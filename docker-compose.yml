@@ -7,10 +7,10 @@ services:
       - 8883:8883 # MQTT with TLS
       - 9011:9011 # websocket
     volumes:
-      - ./data/mosquitto-data/config:/mosquitto/config
-      - ./data/mosquitto-data/data:/mosquitto/data
-      - ./data/mosquitto-data/log:/mosquitto/log
-      - ./data/mosquitto-data/certs:/home/certs
+      - ./mosquitto-data/config:/mosquitto/config
+      - ./mosquitto-data/data:/mosquitto/data
+      - ./mosquitto-data/log:/mosquitto/log
+      - ./mosquitto-data/certs:/home/certs
 
   node-red:
     image: nodered/node-red:latest
@@ -19,18 +19,18 @@ services:
     ports:
       - 1880:1880
     volumes:
-      - ./data/node-red-data:/data
+      - ./node-red-data:/data
 
   postgres-db:
     image: postgres:17
     ports:
       - 5432:5432
     volumes:
-      - ./data/postgres-data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=root
   
   app:
-      build: ./data/app-data/
+      build: ./app-data/
       ports:
         - "8000:8000"
