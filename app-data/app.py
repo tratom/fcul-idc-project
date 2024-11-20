@@ -11,6 +11,34 @@ import json
 
 from modules.functions import get_model_response
 
+def scale_values(data):
+    min_values = {
+        'acceleration_x': -5.3505,
+        'acceleration_y': -3.299,
+        'acceleration_z': -3.7538,
+        'gyro_x': -4.4306,
+        'gyro_y': -7.4647,
+        'gyro_z': -9.48
+    }
+    max_values = {
+        'acceleration_x': 5.6033,
+        'acceleration_y': 2.668,
+        'acceleration_z': 1.6403,
+        'gyro_x': 4.8742,
+        'gyro_y': 8.498,
+        'gyro_z': 11.2662
+    }
+
+    # Scale the data
+    scaled_data = {}
+    for key, value in data.items():
+        if key in min_values and key in max_values:
+            scaled_data[key] = (value - min_values[key]) / (max_values[key] - min_values[key])
+        else:
+            raise KeyError(f"Key {key} not found in min_values or max_values")
+
+    return scaled_data
+
 
 app = Flask(__name__)
 
@@ -30,15 +58,19 @@ def predict():
             'error': 'Body is empty.'
         }, 500
 
-    # try:
-    data = []
-    model_name = 'rf-model' #feature_dict[0]['model']
-    model = joblib.load('model/' + model_name + '.dat.gz')
-    data.append(feature_dict)
-    response = get_model_response(data, model)
-    # except ValueError as e:
-    #     print(e)
-    #     return {'error': str(e).split('\n')}, 500
+    try:
+        # Assuming the model is named "rf-model.dat.gz"
+        model_name = 'rf-model'
+        model = joblib.load('model/' + model_name + '.dat.gz')
+        
+        # Directly pass feature_dict to scale_values
+        scaled_data = scale_values(feature_dict)
+        
+        # Wrap scaled_data into a list before passing to the model
+        response = get_model_response([scaled_data], model)
+    except ValueError as e:
+        print(e)
+        return {'error': str(e).split('\n')}, 500
 
     return response, 200
 
