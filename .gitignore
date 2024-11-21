@@ -2,3 +2,4 @@ node-red-data/
 mosquitto-data/data
 mosquitto-data/log
 postgres-data/
+database.ini

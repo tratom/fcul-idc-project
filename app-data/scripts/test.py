@@ -2,12 +2,17 @@ import requests
 import csv
 import time
 import json
+from sklearn.metrics import confusion_matrix, classification_report
 
 # Endpoint del server
 url = "http://localhost:8000/predict"
 
 # File dei dati
 file_path = "dati.csv"
+
+# Initialize lists to store expected and predicted activities
+expected_activities = []
+predicted_activities = []
 
 # Funzione per inviare dati
 def send_data(data):
@@ -21,6 +26,7 @@ def send_data(data):
         "gyro_z": float(data["gyro_z"])
     }
     expected_activity = data["activity"]  # L'attività attesa dal CSV
+    expected_activities.append(int(expected_activity))  # Append to expected list
     
     try:
         response = requests.post(url, json=payload, headers=headers)
@@ -28,8 +34,9 @@ def send_data(data):
         
         # Confronta l'attività attesa con la risposta
         predicted_activity = int(response_data.get("prediction"))  # Adatta questa chiave al tuo JSON di risposta
-        match = "CORRECT" if str(predicted_activity) == expected_activity else "INCORRECT"
+        predicted_activities.append(predicted_activity)  # Append to predicted list
         
+        match = "CORRECT" if str(predicted_activity) == expected_activity else "INCORRECT"
         print(f"Expected: {expected_activity}, Predicted: {predicted_activity}, Match: {match}")
         
     except Exception as e:
@@ -41,3 +48,13 @@ with open(file_path, mode='r') as file:
     for row in reader:
         send_data(row)
         time.sleep(0.1)  # Pausa tra le richieste per evitare sovraccarico del server
+
+# Calculate and display the confusion matrix
+if expected_activities and predicted_activities:
+    print("\nConfusion Matrix:")
+    print(confusion_matrix(expected_activities, predicted_activities))
+    
+    print("\nClassification Report:")
+    print(classification_report(expected_activities, predicted_activities))
+else:
+    print("No data to calculate confusion matrix.")

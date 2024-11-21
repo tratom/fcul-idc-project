@@ -6,15 +6,14 @@ WORKDIR /app
 
 # Copy files
 COPY app.py /app
-COPY train.py /app
-COPY training.data /app
+COPY training /app/training
 COPY requirements.txt /app
 COPY model /app/model
 COPY modules /app/modules
 
 # Install dependencies
 RUN pip install -r requirements.txt
-RUN python3 train.py
+RUN python3 training/training.py
 
 # Run the application
 EXPOSE 8000
