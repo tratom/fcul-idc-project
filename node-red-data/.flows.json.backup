@@ -1,0 +1,654 @@
+[
+    {
+        "id": "f954f2675b00170a",
+        "type": "tab",
+        "label": "Flux 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "037aecdc6926ce9a",
+        "type": "mqtt-broker",
+        "name": "IdC",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f5279b01.b328d8",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "026dbc90e6108c22",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "663e0bb9d3f98f3a",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "group_main",
+        "type": "ui_group",
+        "name": "Main Page",
+        "tab": "tab_main",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "tab_main",
+        "type": "ui_tab",
+        "name": "Main Page",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "group_form",
+        "type": "ui_group",
+        "name": "Enter your personal informations",
+        "tab": "tab_form",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "tab_form",
+        "type": "ui_tab",
+        "name": "Form",
+        "icon": "edit",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "group_dashboard",
+        "type": "ui_group",
+        "name": "Watch your data",
+        "tab": "tab_dashboard",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "tab_dashboard",
+        "type": "ui_tab",
+        "name": "Dashboard MQTT",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "MQTT Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "button1",
+        "type": "ui_button",
+        "z": "f954f2675b00170a",
+        "name": "Go to Form",
+        "group": "group_main",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Go to Form",
+        "tooltip": "Click to open the form",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Form",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "ui_control1"
+            ]
+        ]
+    },
+    {
+        "id": "button2",
+        "type": "ui_button",
+        "z": "f954f2675b00170a",
+        "name": "Go to MQTT Dashboard",
+        "group": "group_main",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Go to MQTT Dashboard",
+        "tooltip": "Click to open the MQTT Dashboard",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Dashboard MQTT",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "ui_control1"
+            ]
+        ]
+    },
+    {
+        "id": "ui_control1",
+        "type": "ui_ui_control",
+        "z": "f954f2675b00170a",
+        "name": "",
+        "x": 760,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c14e21d387b528b",
+        "type": "ui_numeric",
+        "z": "f954f2675b00170a",
+        "name": "",
+        "label": "What is your age ?",
+        "tooltip": "",
+        "group": "group_form",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "className": "",
+        "x": 470,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4aa4e12e8e8d1a48",
+        "type": "ui_switch",
+        "z": "f954f2675b00170a",
+        "name": "",
+        "label": "Are you a male ?",
+        "tooltip": "",
+        "group": "group_form",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 250,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b13f1c4ec84b9f0",
+        "type": "ui_button",
+        "z": "f954f2675b00170a",
+        "name": "Go to Main Page",
+        "group": "group_form",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Go to Main Page",
+        "tooltip": "Save",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Main Page",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "ui_control1"
+            ]
+        ]
+    },
+    {
+        "id": "dd24cd7b7ed43eb5",
+        "type": "ui_button",
+        "z": "f954f2675b00170a",
+        "name": "Go to Main Page",
+        "group": "group_dashboard",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Go to Main Page",
+        "tooltip": "Save",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Main Page",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "ui_control1"
+            ]
+        ]
+    },
+    {
+        "id": "420adfb3a892a7d8",
+        "type": "ui_gauge",
+        "z": "f954f2675b00170a",
+        "name": "",
+        "group": "group_dashboard",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Steps",
+        "label": "steps",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "85ee7547c83fb2fb",
+        "type": "debug",
+        "z": "f954f2675b00170a",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "966177e57dbd7d21",
+        "type": "mqtt in",
+        "z": "f954f2675b00170a",
+        "name": "",
+        "topic": "idc/fcxx",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "037aecdc6926ce9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 480,
+        "wires": [
+            [
+                "85ee7547c83fb2fb",
+                "process_data"
+            ]
+        ]
+    },
+    {
+        "id": "process_data",
+        "type": "function",
+        "z": "f954f2675b00170a",
+        "name": "Process MQTT Data",
+        "func": "// Parse data from MQTT payload\nvar data = msg.payload;\n\nreturn [\n    { payload: data.acceleration_x, topic: \"Acceleration X\" },\n    { payload: data.acceleration_y, topic: \"Acceleration Y\" },\n    { payload: data.acceleration_z, topic: \"Acceleration Z\" },\n    { payload: data.gyro_x, topic: \"Gyroscope X\" },\n    { payload: data.gyro_y, topic: \"Gyroscope Y\" },\n    { payload: data.gyro_z, topic: \"Gyroscope Z\" }\n];",
+        "outputs": 6,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "// the code here is executed 1 time at the launch",
+        "finalize": "// the code here is executed 1 time at the strop or reload\n",
+        "libs": [],
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "gauge_acc_x",
+                "chart_acc"
+            ],
+            [
+                "gauge_acc_y",
+                "chart_acc"
+            ],
+            [
+                "chart_acc"
+            ],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "gauge_acc_x",
+        "type": "ui_gauge",
+        "z": "f954f2675b00170a",
+        "name": "Gauge Acc X",
+        "group": "group_dashboard",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Acceleration X",
+        "label": "m/s²",
+        "format": "{{value}}",
+        "min": -2,
+        "max": 2,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "x": 870,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "gauge_acc_y",
+        "type": "ui_gauge",
+        "z": "f954f2675b00170a",
+        "name": "Gauge Acc Y",
+        "group": "group_dashboard",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Acceleration Y",
+        "label": "m/s²",
+        "format": "{{value}}",
+        "min": -2,
+        "max": 2,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "x": 870,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "chart_acc",
+        "type": "ui_chart",
+        "z": "f954f2675b00170a",
+        "name": "Chart Acceleration",
+        "group": "group_dashboard",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": true,
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "No Data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#ff7f0e",
+            "#2ca02c",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 890,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4bfac19de0cfb1c0",
+        "type": "ui_gauge",
+        "z": "f954f2675b00170a",
+        "name": "",
+        "group": "group_dashboard",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Calories Burned",
+        "label": "calories",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 400,
+        "y": 600,
+        "wires": []
+    }
+]
