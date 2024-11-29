@@ -1,10 +1,11 @@
 import paho.mqtt.client as mqtt
 import time
 import json
-from datetime import datetime
+from datetime import date, datetime
 import psycopg2
 from psycopg2.extras import execute_values
 from config import load_config 
+from calculation import calculate_duration_and_calories
 
 def connect(config):
     """ Connect to the PostgreSQL database server """
@@ -31,9 +32,15 @@ def on_message(client, userdata, message):
     try:
         msg_dict = json.loads(msg_str)
         now = datetime.now()
+        current_date = date.today()
 
         # TODO UPDATE THIS VALUE WITH MACHINE LEARNING PROGRAM
         activity = True 
+
+
+        #
+        #  LOAD THIS DATA IN THE DATABASE
+        #
 
         config = load_config()
         conn = connect(config)
@@ -42,7 +49,7 @@ def on_message(client, userdata, message):
 
         records = [
             (
-                now.strftime("%Y-%m-%d"),
+                current_date,
                 now.strftime("%H:%M:%S"),
                 bool(activity),
                 msg_dict.get("acceleration_x"),
@@ -67,7 +74,35 @@ def on_message(client, userdata, message):
         cursor.close()
         conn.close()
 
-        print('New value added')
+        #print('New value added', records)
+
+        #
+        #  CALCULATE ONLINE INFORMATION
+        #
+
+        message = calculate_duration_and_calories(current_date,bool(activity))
+
+        #print('New message', message)
+
+        #
+        #  SEND TREATED DATA TO USER INTERFACE
+        #
+
+        client = mqtt.Client("Client1")
+        client.on_connect = on_connect
+
+        client.connect(broker_hostname, port)
+        client.loop_start()
+
+        topic = "idc/fcresults"
+
+        result = client.publish(topic, json.dumps(message))
+        status = result[0]
+        if status == 0:
+            print(f"Message {message} is published to topic {topic}")
+        else:
+            print("Failed to send message to topic " + topic)
+        client.loop_stop()
 
 
     except json.JSONDecodeError as e:

@@ -24,12 +24,30 @@ cursor.execute(
         age INTEGER,
         is_male BOOL,
         weight FLOAT,
-        height FLOAT
+        height FLOAT,
+        threshold_running INTEGER,
+        threshold_walking INTEGER
     )
     """)
 
 cursor.execute(
     """
-    INSERT INTO users (age, is_male, weight, height) 
-    VALUES (30, true, 75.0, 1.80)
+    CREATE TABLE IF NOT EXISTS activity (
+        _id SERIAL PRIMARY KEY,
+        date DATE NOT NULL,
+        time TIME NOT NULL,
+        activity BOOL,
+        acceleration_x FLOAT NOT NULL,
+        acceleration_y FLOAT NOT NULL,
+        acceleration_z FLOAT NOT NULL,
+        gyro_x FLOAT NOT NULL,
+        gyro_y FLOAT NOT NULL,
+        gyro_z FLOAT NOT NULL
+    )
+    """)
+
+cursor.execute(
+    """
+    INSERT INTO users (age, is_male, weight, height, threshold_running, threshold_walking) 
+    VALUES (30, true, 75.0, 1.80, 30, 30)
     """)
