@@ -159,17 +159,6 @@
         }
     },
     {
-        "id": "663e0bb9d3f98f3a",
-        "type": "ui_group",
-        "name": "Default",
-        "tab": "",
-        "order": 1,
-        "disp": true,
-        "width": "10",
-        "collapse": false,
-        "className": ""
-    },
-    {
         "id": "group_main",
         "type": "ui_group",
         "name": "Main Page",
@@ -253,6 +242,14 @@
         "willPayload": ""
     },
     {
+        "id": "ae035ab4d6bf4e74",
+        "type": "postgresdb",
+        "hostname": "localhost",
+        "port": "5432",
+        "db": "postgres",
+        "ssl": true
+    },
+    {
         "id": "button1",
         "type": "ui_button",
         "z": "f954f2675b00170a",
@@ -320,32 +317,6 @@
         ]
     },
     {
-        "id": "6c14e21d387b528b",
-        "type": "ui_numeric",
-        "z": "f954f2675b00170a",
-        "name": "",
-        "label": "What is your age ?",
-        "tooltip": "",
-        "group": "group_form",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "wrap": false,
-        "passthru": true,
-        "topic": "topic",
-        "topicType": "msg",
-        "format": "{{value}}",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "className": "",
-        "x": 470,
-        "y": 360,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "4aa4e12e8e8d1a48",
         "type": "ui_switch",
         "z": "f954f2675b00170a",
@@ -353,7 +324,7 @@
         "label": "Are you a male ?",
         "tooltip": "",
         "group": "group_form",
-        "order": 2,
+        "order": 1,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -371,10 +342,12 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 250,
-        "y": 360,
+        "x": 170,
+        "y": 400,
         "wires": [
-            []
+            [
+                "gender_listener"
+            ]
         ]
     },
     {
@@ -383,7 +356,7 @@
         "z": "f954f2675b00170a",
         "name": "Go to Main Page",
         "group": "group_form",
-        "order": 3,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -434,34 +407,6 @@
         ]
     },
     {
-        "id": "420adfb3a892a7d8",
-        "type": "ui_gauge",
-        "z": "f954f2675b00170a",
-        "name": "",
-        "group": "group_dashboard",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "gtype": "donut",
-        "title": "Steps",
-        "label": "steps",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "100000",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 610,
-        "y": 580,
-        "wires": []
-    },
-    {
         "id": "85ee7547c83fb2fb",
         "type": "debug",
         "z": "f954f2675b00170a",
@@ -475,7 +420,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 380,
-        "y": 540,
+        "y": 800,
         "wires": []
     },
     {
@@ -492,7 +437,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 150,
-        "y": 480,
+        "y": 720,
         "wires": [
             [
                 "85ee7547c83fb2fb",
@@ -512,8 +457,8 @@
         "initialize": "// the code here is executed 1 time at the launch",
         "finalize": "// the code here is executed 1 time at the strop or reload\n",
         "libs": [],
-        "x": 400,
-        "y": 460,
+        "x": 420,
+        "y": 720,
         "wires": [
             [
                 "gauge_acc_x",
@@ -551,8 +496,8 @@
             "#e6e600",
             "#ca3838"
         ],
-        "x": 870,
-        "y": 460,
+        "x": 810,
+        "y": 720,
         "wires": []
     },
     {
@@ -575,8 +520,8 @@
             "#e6e600",
             "#ca3838"
         ],
-        "x": 870,
-        "y": 500,
+        "x": 810,
+        "y": 760,
         "wires": []
     },
     {
@@ -617,38 +562,297 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 890,
-        "y": 420,
+        "x": 830,
+        "y": 680,
         "wires": [
             []
         ]
     },
     {
-        "id": "4bfac19de0cfb1c0",
-        "type": "ui_gauge",
+        "id": "age_listener",
+        "type": "change",
         "z": "f954f2675b00170a",
-        "name": "",
-        "group": "group_dashboard",
-        "order": 5,
+        "name": "Set Age",
+        "rules": [
+            {
+                "t": "set",
+                "p": "age",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "age",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "1dd7a0d177701c23"
+            ]
+        ]
+    },
+    {
+        "id": "gender_listener",
+        "type": "change",
+        "z": "f954f2675b00170a",
+        "name": "Set Gender",
+        "rules": [
+            {
+                "t": "set",
+                "p": "is_male",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "is_male",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 400,
+        "wires": [
+            [
+                "1dd7a0d177701c23"
+            ]
+        ]
+    },
+    {
+        "id": "9b8f876ace56e28c",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "What is your weight ?",
+        "label": "What is your weight ?",
+        "tooltip": "",
+        "group": "group_form",
+        "order": 2,
         "width": 0,
         "height": 0,
-        "gtype": "donut",
-        "title": "Calories Burned",
-        "label": "calories",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "100000",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
         "className": "",
-        "x": 400,
-        "y": 600,
+        "topicType": "msg",
+        "x": 160,
+        "y": 460,
+        "wires": [
+            [
+                "f775cd64a85c3d29"
+            ]
+        ]
+    },
+    {
+        "id": "5c3f56c0133b346b",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "What is your age?",
+        "label": "What is your age ?",
+        "tooltip": "",
+        "group": "group_form",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "age_listener"
+            ]
+        ]
+    },
+    {
+        "id": "9329c636082b8899",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "What is your height ?",
+        "label": "What is your height ?",
+        "tooltip": "",
+        "group": "group_form",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 160,
+        "y": 520,
+        "wires": [
+            [
+                "8be75a47dd460fb4"
+            ]
+        ]
+    },
+    {
+        "id": "f775cd64a85c3d29",
+        "type": "change",
+        "z": "f954f2675b00170a",
+        "name": "Set Weight",
+        "rules": [
+            {
+                "t": "set",
+                "p": "weight",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "weight",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 460,
+        "wires": [
+            [
+                "1dd7a0d177701c23"
+            ]
+        ]
+    },
+    {
+        "id": "8be75a47dd460fb4",
+        "type": "change",
+        "z": "f954f2675b00170a",
+        "name": "Set height",
+        "rules": [
+            {
+                "t": "set",
+                "p": "height",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "height",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 520,
+        "wires": [
+            [
+                "1dd7a0d177701c23"
+            ]
+        ]
+    },
+    {
+        "id": "debug_insert_result",
+        "type": "debug",
+        "z": "f954f2675b00170a",
+        "name": "Résultat Insert",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "cffa63e67e8e2bb1",
+        "type": "mqtt out",
+        "z": "f954f2675b00170a",
+        "name": "",
+        "topic": "idc/fcdata",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "037aecdc6926ce9a",
+        "x": 920,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "1dd7a0d177701c23",
+        "type": "function",
+        "z": "f954f2675b00170a",
+        "name": "Change data correctly",
+        "func": "var data = msg.payload;\nvar type = msg.topic;\n\nmsg.payload = {\n    value: data,\n    topic: type\n};\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 420,
+        "wires": [
+            [
+                "cffa63e67e8e2bb1",
+                "7d7cde752e41c77e"
+            ]
+        ]
+    },
+    {
+        "id": "7d7cde752e41c77e",
+        "type": "debug",
+        "z": "f954f2675b00170a",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 400,
         "wires": []
     }
 ]

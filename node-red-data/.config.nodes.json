@@ -829,5 +829,25 @@
                 "file": "/data/node_modules/node-red-node-random/random.js"
             }
         }
+    },
+    "node-red-contrib-postgres-multi": {
+        "name": "node-red-contrib-postgres-multi",
+        "version": "0.2.0",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "PostgreSql": {
+                "name": "PostgreSql",
+                "types": [
+                    "postgresdb",
+                    "postgres"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-postgres-multi",
+                "file": "/data/node_modules/node-red-contrib-postgres-multi/postgres.js"
+            }
+        }
     }
 }
