@@ -1,13 +1,9 @@
-# Local imports
 import datetime
-
-# Third part imports
-from flask import Flask
-from flask import request
+import json
+from flask import Flask, request
 import pandas as pd
 import joblib
-import gzip
-import json
+from paho.mqtt.client import Client
 
 from modules.functions import get_model_response
 
@@ -36,27 +32,21 @@ def scale_values(data):
             scaled_data[key] = (value - min_values[key]) / (max_values[key] - min_values[key])
         else:
             raise KeyError(f"Key {key} not found in min_values or max_values")
-
     return scaled_data
 
-
 app = Flask(__name__)
-
 
 @app.route('/health', methods=['GET'])
 def health():
     """Return service health"""
     return 'ok'
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
     feature_dict = request.get_json()
     print(feature_dict)
     if not feature_dict:
-        return {
-            'error': 'Body is empty.'
-        }, 500
+        return {'error': 'Body is empty.'}, 500
 
     try:
         # Assuming the model is named "rf-model.dat.gz"
@@ -74,6 +64,30 @@ def predict():
 
     return response, 200
 
+"""
+# MQTT Configuration
+broker_hostname = "127.0.0.1"
+port = 1883
+topic = "idc/iris"
 
+def on_message(client, userdata, msg):
+    try:
+        message = json.loads(msg.payload.decode('utf-8'))
+        print(f"Received message: {message}")
+
+        # Do prediction here
+        scaled_data = scale_values(message)
+        model = joblib.load('model/rf-model.dat.gz')
+        prediction = get_model_response([scaled_data], model)
+        print(f"Prediction: {prediction}")
+    except Exception as e:
+        print(f"Error processing message: {e}")
+
+mqtt_client = Client("Flask_Server")
+mqtt_client.on_message = on_message
+mqtt_client.connect(broker_hostname, port)
+mqtt_client.subscribe(topic)
+mqtt_client.loop_start()
+"""
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
