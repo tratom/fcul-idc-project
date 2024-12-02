@@ -13,7 +13,7 @@ COPY modules /app/modules
 
 # Install dependencies
 RUN pip install -r requirements.txt
-RUN python3 training/training.py
+RUN python3 /app/training/training.py
 
 # Run the application
 EXPOSE 8000

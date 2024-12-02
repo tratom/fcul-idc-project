@@ -32,7 +32,7 @@ def unscale01(x, lower, upper):
 
 
 # Leitura dos dados
-df = pd.read_csv('training.data', delimiter=';')
+df = pd.read_csv('/app/training/training.data', delimiter=';')
 
 data = np.array(df.values[: , 2:], dtype = float)   # Pandas dtype = object, logo tudo é permitido
 (N, d) = data.shape

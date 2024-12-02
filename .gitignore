@@ -1,1 +1,4 @@
+postgres-data/
+#node-red-data/
+#mosquitto-data/
 database.ini
