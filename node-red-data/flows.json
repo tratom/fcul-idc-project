@@ -255,8 +255,8 @@
         "type": "ui_ui_control",
         "z": "f954f2675b00170a",
         "name": "",
-        "x": 760,
-        "y": 140,
+        "x": 680,
+        "y": 160,
         "wires": [
             []
         ]
@@ -287,39 +287,11 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 170,
+        "x": 130,
         "y": 400,
         "wires": [
             [
                 "gender_listener"
-            ]
-        ]
-    },
-    {
-        "id": "3b13f1c4ec84b9f0",
-        "type": "ui_button",
-        "z": "f954f2675b00170a",
-        "name": "Go to Main Page",
-        "group": "group_form",
-        "order": 5,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Go to Main Page",
-        "tooltip": "Save",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "Main Page",
-        "payloadType": "str",
-        "topic": "",
-        "topicType": "str",
-        "x": 250,
-        "y": 180,
-        "wires": [
-            [
-                "ui_control1"
             ]
         ]
     },
@@ -329,7 +301,7 @@
         "z": "f954f2675b00170a",
         "name": "Go to Main Page",
         "group": "group_dashboard",
-        "order": 6,
+        "order": 11,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -364,8 +336,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 380,
-        "y": 800,
+        "x": 360,
+        "y": 1000,
         "wires": []
     },
     {
@@ -373,7 +345,7 @@
         "type": "mqtt in",
         "z": "f954f2675b00170a",
         "name": "",
-        "topic": "idc/fcxx",
+        "topic": "idc/fcresults",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "037aecdc6926ce9a",
@@ -382,7 +354,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 150,
-        "y": 720,
+        "y": 860,
         "wires": [
             [
                 "85ee7547c83fb2fb",
@@ -395,122 +367,52 @@
         "type": "function",
         "z": "f954f2675b00170a",
         "name": "Process MQTT Data",
-        "func": "// Parse data from MQTT payload\nvar data = msg.payload;\n\nreturn [\n    { payload: data.acceleration_x, topic: \"Acceleration X\" },\n    { payload: data.acceleration_y, topic: \"Acceleration Y\" },\n    { payload: data.acceleration_z, topic: \"Acceleration Z\" },\n    { payload: data.gyro_x, topic: \"Gyroscope X\" },\n    { payload: data.gyro_y, topic: \"Gyroscope Y\" },\n    { payload: data.gyro_z, topic: \"Gyroscope Z\" }\n];",
-        "outputs": 6,
+        "func": "// Parse data from MQTT payload\nvar data = msg.payload;\n\nreturn [\n    { payload: data.time_day_run, topic: \"time_day_run\" },\n    { payload: data.time_day_walk, topic: \"time_day_walk\" },\n    { payload: data.time_week_walk, topic: \"time_week_walk\" },\n    { payload: data.time_week_run, topic: \"time_week_run\" },\n    { payload: data.time_months_run, topic: \"time_months_run\" },\n    { payload: data.time_months_walk, topic: \"time_months_walk\" },\n    { payload: data.calories_day, topic: \"calories_day\" },\n    { payload: data.calories_week, topic: \"calories_week\" },\n    { payload: data.calories_month, topic: \"calories_month\" },\n    { payload: data.walking_threshold_percent, topic: \"walking_threshold_percent\" },\n    { payload: data.running_threshold_percent, topic: \"running_threshold_percent\" },\n    { payload: data.is_running, topic: \"is_running\" },\n];",
+        "outputs": 12,
         "timeout": "",
         "noerr": 0,
         "initialize": "// the code here is executed 1 time at the launch",
         "finalize": "// the code here is executed 1 time at the strop or reload\n",
         "libs": [],
-        "x": 420,
-        "y": 720,
+        "x": 400,
+        "y": 860,
         "wires": [
             [
-                "gauge_acc_x",
-                "chart_acc"
+                "7f24efed83f33009"
             ],
             [
-                "gauge_acc_y",
-                "chart_acc"
+                "d78f0575c73589b7"
             ],
             [
-                "chart_acc"
+                "f1fbb283f1f39b33"
             ],
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "gauge_acc_x",
-        "type": "ui_gauge",
-        "z": "f954f2675b00170a",
-        "name": "Gauge Acc X",
-        "group": "group_dashboard",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Acceleration X",
-        "label": "m/s²",
-        "format": "{{value}}",
-        "min": -2,
-        "max": 2,
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "x": 810,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "gauge_acc_y",
-        "type": "ui_gauge",
-        "z": "f954f2675b00170a",
-        "name": "Gauge Acc Y",
-        "group": "group_dashboard",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Acceleration Y",
-        "label": "m/s²",
-        "format": "{{value}}",
-        "min": -2,
-        "max": 2,
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "x": 810,
-        "y": 760,
-        "wires": []
-    },
-    {
-        "id": "chart_acc",
-        "type": "ui_chart",
-        "z": "f954f2675b00170a",
-        "name": "Chart Acceleration",
-        "group": "group_dashboard",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "label": "",
-        "chartType": "line",
-        "legend": true,
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "No Data",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#ff7f0e",
-            "#2ca02c",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 830,
-        "y": 680,
-        "wires": [
-            []
+            [
+                "64d31cdda3faf2a0"
+            ],
+            [
+                "f16a654349f77952"
+            ],
+            [
+                "79b75c2dd7592071"
+            ],
+            [
+                "6b56b9eef5407b43"
+            ],
+            [
+                "6b56b9eef5407b43"
+            ],
+            [
+                "6b56b9eef5407b43"
+            ],
+            [
+                "aa8604c8c73fb4de"
+            ],
+            [
+                "8795bfd6c534c88e"
+            ],
+            [
+                "fd424645031b0313"
+            ]
         ]
     },
     {
@@ -539,7 +441,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 430,
+        "x": 420,
         "y": 340,
         "wires": [
             [
@@ -599,7 +501,7 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 160,
+        "x": 140,
         "y": 460,
         "wires": [
             [
@@ -625,7 +527,7 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 170,
+        "x": 130,
         "y": 340,
         "wires": [
             [
@@ -651,7 +553,7 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 160,
+        "x": 140,
         "y": 520,
         "wires": [
             [
@@ -741,8 +643,8 @@
         "correl": "",
         "expiry": "",
         "broker": "037aecdc6926ce9a",
-        "x": 860,
-        "y": 480,
+        "x": 940,
+        "y": 600,
         "wires": []
     },
     {
@@ -757,8 +659,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
-        "y": 420,
+        "x": 720,
+        "y": 500,
         "wires": [
             [
                 "cffa63e67e8e2bb1",
@@ -779,8 +681,432 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 400,
+        "x": 940,
+        "y": 440,
         "wires": []
+    },
+    {
+        "id": "b540ea535968f38d",
+        "type": "change",
+        "z": "f954f2675b00170a",
+        "name": "Set threshold_running",
+        "rules": [
+            {
+                "t": "set",
+                "p": "threshold_running",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "threshold_running",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "1dd7a0d177701c23"
+            ]
+        ]
+    },
+    {
+        "id": "6b9086a3c5a078b1",
+        "type": "change",
+        "z": "f954f2675b00170a",
+        "name": "Set threshold_walking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "threshold_walking",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "threshold_walking",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 640,
+        "wires": [
+            [
+                "1dd7a0d177701c23"
+            ]
+        ]
+    },
+    {
+        "id": "3b13f1c4ec84b9f0",
+        "type": "ui_button",
+        "z": "f954f2675b00170a",
+        "name": "Go to Main Page",
+        "group": "group_form",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Go to Main Page",
+        "tooltip": "Save",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Main Page",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "ui_control1"
+            ]
+        ]
+    },
+    {
+        "id": "8795bfd6c534c88e",
+        "type": "ui_gauge",
+        "z": "f954f2675b00170a",
+        "name": "How much the r threshold is reached",
+        "group": "group_dashboard",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "How much the running goal is reached",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#b30000",
+            "#e6e600",
+            "#52cb3a"
+        ],
+        "seg1": "20",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 870,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "aa8604c8c73fb4de",
+        "type": "ui_gauge",
+        "z": "f954f2675b00170a",
+        "name": "How much the w threshold is reached",
+        "group": "group_dashboard",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "How much the walking goal is reached",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#b30000",
+            "#e6e600",
+            "#52cb3a"
+        ],
+        "seg1": "20",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 870,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "6b56b9eef5407b43",
+        "type": "ui_chart",
+        "z": "f954f2675b00170a",
+        "name": "Calories burned",
+        "group": "group_dashboard",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Calories burned",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Calories",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 800,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7f24efed83f33009",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "Minutes running this day",
+        "label": "Minutes running this day",
+        "tooltip": "",
+        "group": "group_dashboard",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 830,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d78f0575c73589b7",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "Minutes walking this day",
+        "label": "Minutes walking this day",
+        "tooltip": "",
+        "group": "group_dashboard",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 830,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1fbb283f1f39b33",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "Minutes running this week",
+        "label": "Minutes running this week",
+        "tooltip": "",
+        "group": "group_dashboard",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 830,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "64d31cdda3faf2a0",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "Minutes walking this week",
+        "label": "Minutes walking this week",
+        "tooltip": "",
+        "group": "group_dashboard",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 830,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f16a654349f77952",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "Minutes running this year",
+        "label": "Minutes running this year",
+        "tooltip": "",
+        "group": "group_dashboard",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 830,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79b75c2dd7592071",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "Minutes walking this week",
+        "label": "Minutes walking this week",
+        "tooltip": "",
+        "group": "group_dashboard",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 830,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fd424645031b0313",
+        "type": "ui_switch",
+        "z": "f954f2675b00170a",
+        "name": "Are you running",
+        "label": "Are you running ?",
+        "tooltip": "",
+        "group": "group_dashboard",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 800,
+        "y": 1220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "401fc5218dd7a368",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "What is your running threshold",
+        "label": "Enter running threshold (min per day)",
+        "tooltip": "",
+        "group": "group_form",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 170,
+        "y": 580,
+        "wires": [
+            [
+                "b540ea535968f38d"
+            ]
+        ]
+    },
+    {
+        "id": "486d6e9691fe710a",
+        "type": "ui_text_input",
+        "z": "f954f2675b00170a",
+        "name": "What is your walking threshold",
+        "label": "Enter  walking threshold (min per day)",
+        "tooltip": "",
+        "group": "group_form",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 170,
+        "y": 640,
+        "wires": [
+            [
+                "6b9086a3c5a078b1"
+            ]
+        ]
     }
 ]
