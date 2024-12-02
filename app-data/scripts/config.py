@@ -1,3 +1,4 @@
+import psycopg2
 from configparser import ConfigParser
 
 def load_config(filename='database.ini', section='postgresql'):
@@ -15,6 +16,17 @@ def load_config(filename='database.ini', section='postgresql'):
 
     return config
 
+def connect(config):
+    """ Connect to the PostgreSQL database server """
+    try:
+        # connecting to the PostgreSQL server
+        conn = psycopg2.connect(**config)
+        print('Connected to the PostgreSQL server.')
+        return conn
+    except (psycopg2.DatabaseError, Exception) as error:
+        print(error)
+
 if __name__ == '__main__':
     config = load_config()
     print(config)
+    conn = connect(config)
