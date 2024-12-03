@@ -18,6 +18,7 @@
         },
         "debug": {
             "clearType": "all"
-        }
+        },
+        "menu-menu-item-sidebar": true
     }
 }
