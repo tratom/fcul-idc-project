@@ -37,7 +37,7 @@ def scale_values(data):
             scaled_data[key] = (value - min_values[key]) / (max_values[key] - min_values[key])
         else:
             raise KeyError(f"Key {key} not found in min_values or max_values")
-
+# TODO use exaclty the same structure for the training, in the same exact order
     return scaled_data
 
 
