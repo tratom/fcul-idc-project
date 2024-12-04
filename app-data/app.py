@@ -32,6 +32,7 @@ def scale_values(data):
     # Scale the data
     scaled_data = {}
     for key, value in data.items():
+        value = float(value)
         if key in min_values and key in max_values:
             scaled_data[key] = (value - min_values[key]) / (max_values[key] - min_values[key])
         else:
@@ -60,7 +61,7 @@ def predict():
 
     try:
         # Assuming the model is named "rf-model.dat.gz"
-        model_name = 'rf-model'
+        model_name = 'knn-model'
         model = joblib.load('model/' + model_name + '.dat.gz')
         
         # Directly pass feature_dict to scale_values

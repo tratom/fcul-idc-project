@@ -2,3 +2,6 @@
 # mosquitto-data/
 postgres-data/
 database.ini
+mosquitto-data/data/mosquitto.db
+**/logs
+*.log 

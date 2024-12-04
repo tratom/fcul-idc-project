@@ -2,7 +2,15 @@
     {
         "id": "acebf30b628324b0",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Offline",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e2c48a538353d801",
+        "type": "tab",
+        "label": "Online",
         "disabled": false,
         "info": "",
         "env": []
@@ -62,25 +70,6 @@
         "userFieldType": "str",
         "password": "root",
         "passwordFieldType": "str"
-    },
-    {
-        "id": "9fecdf3190a69c9d",
-        "type": "ui_group",
-        "name": "dashboard",
-        "tab": "15b8b5c3b96ba416",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "15b8b5c3b96ba416",
-        "type": "ui_tab",
-        "name": "User Data",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
     },
     {
         "id": "8bd336bf9cb2e6f1",
@@ -180,18 +169,10 @@
         }
     },
     {
-        "id": "dd68ec0c1ac0b2f7",
-        "type": "ui_tab",
-        "name": "Dashboard",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
-    },
-    {
         "id": "62f15109aa2f90a2",
         "type": "ui_group",
-        "name": "dasboard",
-        "tab": "dd68ec0c1ac0b2f7",
+        "name": "Statistic",
+        "tab": "4e4a2383db18e3c3",
         "order": 1,
         "disp": true,
         "width": "6",
@@ -199,10 +180,29 @@
         "className": ""
     },
     {
-        "id": "b1abe26a640988f8",
+        "id": "d18297c87373db73",
         "type": "ui_group",
-        "name": "Thresholds",
-        "tab": "dd68ec0c1ac0b2f7",
+        "name": "Statistics",
+        "tab": "23362710de61490b",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "23362710de61490b",
+        "type": "ui_tab",
+        "name": "Online Data",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e1a2f045e06dfd7f",
+        "type": "ui_group",
+        "name": "User Data",
+        "tab": "23362710de61490b",
         "order": 2,
         "disp": true,
         "width": "6",
@@ -210,21 +210,34 @@
         "className": ""
     },
     {
-        "id": "bad2002f2ef54b31",
-        "type": "debug",
-        "z": "acebf30b628324b0",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1180,
-        "y": 900,
-        "wires": []
+        "id": "4e4a2383db18e3c3",
+        "type": "ui_tab",
+        "name": "Offline Data",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "9fb89ab32f39261e",
+        "type": "ui_group",
+        "name": "User Data",
+        "tab": "4e4a2383db18e3c3",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "032063b9cbd6eb32",
+        "type": "ui_group",
+        "name": "Thresholds",
+        "tab": "4e4a2383db18e3c3",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "0b2881757468b458",
@@ -233,7 +246,7 @@
         "name": "",
         "events": "all",
         "x": 80,
-        "y": 600,
+        "y": 160,
         "wires": [
             [
                 "6d3919916a4145f1",
@@ -248,7 +261,7 @@
         "z": "acebf30b628324b0",
         "name": "user-data",
         "label": "User Data",
-        "group": "9fecdf3190a69c9d",
+        "group": "9fb89ab32f39261e",
         "order": 0,
         "width": 0,
         "height": 0,
@@ -295,66 +308,11 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 240,
-        "y": 560,
+        "x": 280,
+        "y": 160,
         "wires": [
             [
-                "cbe882a2a82e4d22"
-            ]
-        ]
-    },
-    {
-        "id": "c861c111c0cacc30",
-        "type": "postgresql",
-        "z": "acebf30b628324b0",
-        "name": "",
-        "query": "INSERT INTO user_data (gender, age, weight, height)\nVALUES ($1, $2, $3, $4)",
-        "postgreSQLConfig": "f77c186364b39603",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 570,
-        "y": 560,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "cbe882a2a82e4d22",
-        "type": "function",
-        "z": "acebf30b628324b0",
-        "name": "function 2",
-        "func": "msg.params = [\n    msg.payload.gender,\n    msg.payload.age,\n    msg.payload.weight,\n    msg.payload.height\n];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 400,
-        "y": 560,
-        "wires": [
-            [
-                "c861c111c0cacc30"
-            ]
-        ]
-    },
-    {
-        "id": "8a6e9e026ddf0cd9",
-        "type": "postgresql",
-        "z": "acebf30b628324b0",
-        "name": "",
-        "query": "SELECT * FROM user_data LIMIT 1;",
-        "postgreSQLConfig": "f77c186364b39603",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 430,
-        "y": 700,
-        "wires": [
-            [
-                "dcbacccabfd6a2e5",
-                "758ca2d032400175"
+                "a62adf6cdd8da95e"
             ]
         ]
     },
@@ -395,12 +353,12 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 830,
-        "y": 1120,
+        "x": 490,
+        "y": 240,
         "wires": [
             [
                 "0a9d0e2a03636c45",
-                "8a6e9e026ddf0cd9"
+                "758ca2d032400175"
             ]
         ]
     },
@@ -409,15 +367,15 @@
         "type": "function",
         "z": "acebf30b628324b0",
         "name": "function 3",
-        "func": "node.warn(msg.payload)\n// Extract the start_date and end_date from the incoming payload\nconst startDate = new Date(msg.payload.start_date);\nconst endDate = new Date(msg.payload.end_date);\n\n// Ensure the dates are formatted as YYYY-MM-DD\nmsg.params = [\n    startDate.toISOString().slice(0, 10), // Get date part only\n    endDate.toISOString().slice(0, 10)   // Get date part only\n];\n\nreturn msg;",
+        "func": "// Extract the start_date and end_date from the incoming payload\nconst startDate = new Date(msg.payload.start_date);\nconst endDate = new Date(msg.payload.end_date);\n\n// Ensure the dates are formatted as YYYY-MM-DD\nmsg.params = [\n    startDate.toISOString().slice(0, 10), // Get date part only\n    endDate.toISOString().slice(0, 10)   // Get date part only\n];\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 420,
-        "y": 640,
+        "x": 680,
+        "y": 220,
         "wires": [
             [
                 "13f418b52e17a709"
@@ -429,15 +387,15 @@
         "type": "function",
         "z": "acebf30b628324b0",
         "name": "getVelocity",
-        "func": "// The velocity data table\nconst velocityData = [\n    { ageRange: \"20 to 29\", gender: \"Male\", velocity: 1.36 },\n    { ageRange: \"20 to 29\", gender: \"Female\", velocity: 1.34 },\n    { ageRange: \"30 to 39\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"30 to 39\", gender: \"Female\", velocity: 1.34 },\n    { ageRange: \"40 to 49\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"40 to 49\", gender: \"Female\", velocity: 1.39 },\n    { ageRange: \"50 to 59\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"50 to 59\", gender: \"Female\", velocity: 1.31 },\n    { ageRange: \"60 to 69\", gender: \"Male\", velocity: 1.34 },\n    { ageRange: \"60 to 69\", gender: \"Female\", velocity: 1.24 },\n    { ageRange: \"70 to 79\", gender: \"Male\", velocity: 1.26 },\n    { ageRange: \"70 to 79\", gender: \"Female\", velocity: 1.13 },\n    { ageRange: \"80 to 89\", gender: \"Male\", velocity: 0.97 },\n    { ageRange: \"80 to 89\", gender: \"Female\", velocity: 0.94 }\n];\n\n// Function to map real age to an age range\nfunction mapAgeToRange(realAge) {\n    if (realAge >= 20 && realAge <= 29) return \"20 to 29\";\n    if (realAge >= 30 && realAge <= 39) return \"30 to 39\";\n    if (realAge >= 40 && realAge <= 49) return \"40 to 49\";\n    if (realAge >= 50 && realAge <= 59) return \"50 to 59\";\n    if (realAge >= 60 && realAge <= 69) return \"60 to 69\";\n    if (realAge >= 70 && realAge <= 79) return \"70 to 79\";\n    if (realAge >= 80 && realAge <= 89) return \"80 to 89\";\n    return null; // Out of range\n}\n\n// Extract the parameters from the input\nconst realAge = msg.payload[0].age; // E.g., 32\nvar gender = msg.payload[0].gender; // E.g., \"Male\"\nif (gender == 0) {\n    gender = \"Male\";\n}\nelse {\n    gender = \"Female\";\n}\n\n// Map the real age to an age range\nconst ageRange = mapAgeToRange(realAge);\n\nif (!ageRange) {\n    msg.payload = { error: \"Age is out of the supported range (20 to 89).\" };\n    return msg;\n}\n\n// Find the matching velocity from the table\nconst result = velocityData.find(\n    entry => entry.ageRange === ageRange && entry.gender === gender\n);\n\n// Return the velocity or an error message if no match is found\nif (result) {\n    msg.payload = { velocity: result.velocity };\n} else {\n    msg.payload = { error: \"No matching velocity found for the given parameters.\" };\n}\nmsg.topic = \"velocity\";\nreturn msg;",
+        "func": "const user_data = flow.get('user_data');\n\n// The velocity data table\nconst velocityData = [\n    { ageRange: \"20 to 29\", gender: \"Male\", velocity: 1.36 },\n    { ageRange: \"20 to 29\", gender: \"Female\", velocity: 1.34 },\n    { ageRange: \"30 to 39\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"30 to 39\", gender: \"Female\", velocity: 1.34 },\n    { ageRange: \"40 to 49\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"40 to 49\", gender: \"Female\", velocity: 1.39 },\n    { ageRange: \"50 to 59\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"50 to 59\", gender: \"Female\", velocity: 1.31 },\n    { ageRange: \"60 to 69\", gender: \"Male\", velocity: 1.34 },\n    { ageRange: \"60 to 69\", gender: \"Female\", velocity: 1.24 },\n    { ageRange: \"70 to 79\", gender: \"Male\", velocity: 1.26 },\n    { ageRange: \"70 to 79\", gender: \"Female\", velocity: 1.13 },\n    { ageRange: \"80 to 89\", gender: \"Male\", velocity: 0.97 },\n    { ageRange: \"80 to 89\", gender: \"Female\", velocity: 0.94 }\n];\n\n// Function to map real age to an age range\nfunction mapAgeToRange(realAge) {\n    if (realAge >= 20 && realAge <= 29) return \"20 to 29\";\n    if (realAge >= 30 && realAge <= 39) return \"30 to 39\";\n    if (realAge >= 40 && realAge <= 49) return \"40 to 49\";\n    if (realAge >= 50 && realAge <= 59) return \"50 to 59\";\n    if (realAge >= 60 && realAge <= 69) return \"60 to 69\";\n    if (realAge >= 70 && realAge <= 79) return \"70 to 79\";\n    if (realAge >= 80 && realAge <= 89) return \"80 to 89\";\n    return null; // Out of range\n}\n\n// Extract the parameters from the input\nconst realAge = user_data.age; // E.g., 32\nvar gender = user_data.gender; // E.g., \"Male\"\nif (gender == 0) {\n    gender = \"Male\";\n}\nelse {\n    gender = \"Female\";\n}\n\n// Map the real age to an age range\nconst ageRange = mapAgeToRange(realAge);\n\nif (!ageRange) {\n    msg.payload = { error: \"Age is out of the supported range (20 to 89).\" };\n    return msg;\n}\n\n// Find the matching velocity from the table\nconst result = velocityData.find(\n    entry => entry.ageRange === ageRange && entry.gender === gender\n);\n\n// Return the velocity or an error message if no match is found\nif (result) {\n    msg.payload = { velocity: result.velocity };\n} else {\n    msg.payload = { error: \"No matching velocity found for the given parameters.\" };\n}\nmsg.topic = \"velocity\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 630,
-        "y": 760,
+        "x": 690,
+        "y": 260,
         "wires": [
             [
                 "ffcbb3f685117911"
@@ -449,18 +407,17 @@
         "type": "function",
         "z": "acebf30b628324b0",
         "name": "compute",
-        "func": "// Extract activity, user data, and velocity from msg.payload\nconst activities = msg.payload.activities; // Array of activities\nconst userData = msg.payload.userData[0]; // User information\nconst velocity = msg.payload.velocity.velocity; // Global velocity for all activities\n\n// Validate the input\nif (!Array.isArray(activities) || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activities, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Get thresholds from flow context\nconst thresholds_values = flow.get('thresholds');\nnode.warn(thresholds_values)\nconst thresholds = {\n    daily: {\n        walk: thresholds_values.walking,\n        run: thresholds_values.running\n    },\n    weekly: {\n        walk: thresholds_values.walking * 7,\n        run: thresholds_values.running * 7\n    },\n    monthly: {\n        walk: thresholds_values.walking * 30,\n        run: thresholds_values.running * 30\n    }\n\n};\n\nif (!thresholds || !thresholds.daily) {\n    node.warn(\"Daily thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Daily thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Variables to store totals\nlet totalWalkDistance = 0; // in meters\nlet totalRunDistance = 0; // in meters\nlet walkDuration = 0; // in seconds\nlet runDuration = 0; // in seconds\nlet totalCaloriesBurnedWalking = 0;\nlet totalCaloriesBurnedRunning = 0;\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    const totalSeconds = hours * 3600 + minutes * 60 + seconds;\n    return totalSeconds;\n}\n\n// Sort activities by time to ensure correct order\nactivities.sort((a, b) => parseTimeStringToSeconds(a.time) - parseTimeStringToSeconds(b.time));\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\n// Process activities\nfor (let i = 0; i < activities.length - 1; i++) {\n    const currentActivity = activities[i];\n    const nextActivity = activities[i + 1];\n\n    const currentTime = parseTimeStringToSeconds(currentActivity.time);\n    const nextTime = parseTimeStringToSeconds(nextActivity.time);\n    let duration = nextTime - currentTime; // Duration in seconds\n\n    // Handle time crossing midnight\n    if (duration < 0) {\n        duration += 24 * 3600; // Add 24 hours in seconds\n    }\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        if (currentActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            totalWalkDistance += distance;\n            walkDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedWalking += caloriesBurned;\n\n        } else if (currentActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            totalRunDistance += distance;\n            runDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedRunning += caloriesBurned;\n        }\n    }\n}\n\n// Convert durations to minutes\nconst walkDurationMinutes = walkDuration / 60;\nconst runDurationMinutes = runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.daily.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.daily.run;\n\n// Prepare the result\nmsg.payload = {\n    totalWalkDistance: (totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: totalCaloriesBurnedRunning.toFixed(2),\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\nreturn msg;\n",
+        "func": "// Extract activity, user data, and velocity from msg.payload\nconst activities = msg.payload.activities; // Array of activities\nconst userData = flow.get(\"user_data\"); // User information\nconst velocity = msg.payload.velocity.velocity; // Global velocity for all activities\n\n// Validate the input\nif (!Array.isArray(activities) || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activities, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Get thresholds from flow context\nconst thresholds_values = flow.get('thresholds');\nconst thresholds = {\n    daily: {\n        walk: thresholds_values.walking,\n        run: thresholds_values.running\n    },\n    weekly: {\n        walk: thresholds_values.walking * 7,\n        run: thresholds_values.running * 7\n    },\n    monthly: {\n        walk: thresholds_values.walking * 30,\n        run: thresholds_values.running * 30\n    }\n\n};\n\nif (!thresholds || !thresholds.daily) {\n    node.warn(\"Daily thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Daily thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Variables to store totals\nlet totalWalkDistance = 0; // in meters\nlet totalRunDistance = 0; // in meters\nlet walkDuration = 0; // in seconds\nlet runDuration = 0; // in seconds\nlet totalCaloriesBurnedWalking = 0;\nlet totalCaloriesBurnedRunning = 0;\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    const totalSeconds = hours * 3600 + minutes * 60 + seconds;\n    return totalSeconds;\n}\n\n// Sort activities by time to ensure correct order\nactivities.sort((a, b) => parseTimeStringToSeconds(a.time) - parseTimeStringToSeconds(b.time));\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\n// Process activities\nfor (let i = 0; i < activities.length - 1; i++) {\n    const currentActivity = activities[i];\n    const nextActivity = activities[i + 1];\n\n    const currentTime = parseTimeStringToSeconds(currentActivity.time);\n    const nextTime = parseTimeStringToSeconds(nextActivity.time);\n    let duration = nextTime - currentTime; // Duration in seconds\n\n    // Handle time crossing midnight\n    if (duration < 0) {\n        duration += 24 * 3600; // Add 24 hours in seconds\n    }\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        if (currentActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            totalWalkDistance += distance;\n            walkDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedWalking += caloriesBurned;\n\n        } else if (currentActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            totalRunDistance += distance;\n            runDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedRunning += caloriesBurned;\n        }\n    }\n}\n\n// Convert durations to minutes\nconst walkDurationMinutes = walkDuration / 60;\nconst runDurationMinutes = runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.daily.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.daily.run;\n\n// Prepare the result\nmsg.payload = {\n    totalWalkDistance: (totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: totalCaloriesBurnedRunning.toFixed(2),\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1140,
-        "y": 640,
+        "x": 1400,
+        "y": 260,
         "wires": [
             [
-                "bad2002f2ef54b31",
                 "215b5bc1046e4f3b",
                 "04a3a04a84b32189",
                 "7d56e3c485b96884",
@@ -469,25 +426,6 @@
                 "292cf0ea10b7014a",
                 "3b933677af634d7e",
                 "f8641075ce821613"
-            ]
-        ]
-    },
-    {
-        "id": "13f418b52e17a709",
-        "type": "postgresql",
-        "z": "acebf30b628324b0",
-        "name": "",
-        "query": "SELECT time, activity\nFROM activity \nWHERE date BETWEEN $1 AND $2;",
-        "postgreSQLConfig": "f77c186364b39603",
-        "split": false,
-        "rowsPerMsg": 1,
-        "outputs": 1,
-        "x": 590,
-        "y": 640,
-        "wires": [
-            [
-                "1cfafbebab71a9df",
-                "cf1ba853ee42f528"
             ]
         ]
     },
@@ -506,45 +444,17 @@
         "useparts": false,
         "accumulate": true,
         "timeout": "",
-        "count": "3",
+        "count": "2",
         "reduceRight": false,
         "reduceExp": "",
         "reduceInit": "",
         "reduceInitType": "",
         "reduceFixup": "",
-        "x": 970,
-        "y": 720,
+        "x": 1230,
+        "y": 260,
         "wires": [
             [
-                "52cc107c9ff69e12",
-                "bad2002f2ef54b31"
-            ]
-        ]
-    },
-    {
-        "id": "dcbacccabfd6a2e5",
-        "type": "change",
-        "z": "acebf30b628324b0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "userData",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 630,
-        "y": 700,
-        "wires": [
-            [
-                "ffcbb3f685117911"
+                "52cc107c9ff69e12"
             ]
         ]
     },
@@ -567,8 +477,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 770,
-        "y": 640,
+        "x": 1050,
+        "y": 220,
         "wires": [
             [
                 "ffcbb3f685117911"
@@ -592,8 +502,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1370,
-        "y": 500,
+        "x": 1650,
+        "y": 120,
         "wires": []
     },
     {
@@ -613,8 +523,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1370,
-        "y": 540,
+        "x": 1650,
+        "y": 160,
         "wires": []
     },
     {
@@ -634,8 +544,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1380,
-        "y": 580,
+        "x": 1660,
+        "y": 200,
         "wires": []
     },
     {
@@ -655,8 +565,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1380,
-        "y": 620,
+        "x": 1660,
+        "y": 240,
         "wires": []
     },
     {
@@ -676,8 +586,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1390,
-        "y": 660,
+        "x": 1670,
+        "y": 280,
         "wires": []
     },
     {
@@ -697,8 +607,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1390,
-        "y": 700,
+        "x": 1670,
+        "y": 320,
         "wires": []
     },
     {
@@ -718,8 +628,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1360,
-        "y": 740,
+        "x": 1640,
+        "y": 360,
         "wires": []
     },
     {
@@ -739,8 +649,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1360,
-        "y": 780,
+        "x": 1640,
+        "y": 400,
         "wires": []
     },
     {
@@ -748,8 +658,8 @@
         "type": "ui_form",
         "z": "acebf30b628324b0",
         "name": "",
-        "label": "Activity Thresholds [mins+",
-        "group": "b1abe26a640988f8",
+        "label": "Activity Thresholds [mins]",
+        "group": "032063b9cbd6eb32",
         "order": 0,
         "width": 0,
         "height": 0,
@@ -780,8 +690,8 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 290,
-        "y": 840,
+        "x": 330,
+        "y": 80,
         "wires": [
             [
                 "a2590877835db57f"
@@ -807,8 +717,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 530,
-        "y": 840,
+        "x": 570,
+        "y": 80,
         "wires": [
             []
         ]
@@ -823,7 +733,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"start_date\":\"06-01-2023\",\"end_date\":\"07-01-2023\"}",
+                "to": "{\"start_date\":\"07-02-2023\",\"end_date\":\"08-11-2023\"}",
                 "tot": "json"
             }
         ],
@@ -832,8 +742,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 560,
-        "y": 1120,
+        "x": 300,
+        "y": 240,
         "wires": [
             [
                 "47a287049a3d14b7"
@@ -841,10 +751,561 @@
         ]
     },
     {
-        "id": "cf1ba853ee42f528",
-        "type": "debug",
+        "id": "a62adf6cdd8da95e",
+        "type": "change",
         "z": "acebf30b628324b0",
-        "name": "debug 3",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "user_data",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13f418b52e17a709",
+        "type": "postgresql",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "query": "SELECT time, activity\nFROM activity \nWHERE date BETWEEN $1 AND $2;",
+        "postgreSQLConfig": "f77c186364b39603",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 870,
+        "y": 220,
+        "wires": [
+            [
+                "1cfafbebab71a9df"
+            ]
+        ]
+    },
+    {
+        "id": "ec4b2c746a30f514",
+        "type": "http request",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "app:8000/predict",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "aa069f28728c5f62"
+            ]
+        ]
+    },
+    {
+        "id": "b217840d8c2c0ef0",
+        "type": "mqtt in",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "topic": "iot/activity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "de5ee2193d03dd1b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 260,
+        "wires": [
+            [
+                "aa069f28728c5f62",
+                "29a7ac1ede60de6d"
+            ]
+        ]
+    },
+    {
+        "id": "f6db7143d156713a",
+        "type": "function",
+        "z": "e2c48a538353d801",
+        "name": "compute",
+        "func": "// Extract activity data from msg.payload\nconst currentActivity = {\n    \"date\": msg.payload[0].date,\n    \"time\": msg.payload[0].time,\n    \"activity\": msg.payload[1].prediction\n}\nconst userData = flow.get(\"user_data\"); // User information\nconst velocity = Number(flow.get(\"velocity\")); // Retrieve global velocity from flow context\n\n// Validate the input\nif (!currentActivity || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activity, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Get thresholds from flow context\nconst thresholds_values = flow.get('thresholds');\nconst thresholds = {\n    daily: {\n        walk: thresholds_values.walking,\n        run: thresholds_values.running\n    }\n};\n\nif (!thresholds || !thresholds.daily) {\n    node.warn(\"Daily thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Daily thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Get cumulative totals from flow context or initialize if not present\nlet cumulativeData = flow.get('cumulativeData') || {\n    totalWalkDistance: 0, // in meters\n    totalRunDistance: 0, // in meters\n    walkDuration: 0, // in seconds\n    runDuration: 0, // in seconds\n    totalCaloriesBurnedWalking: 0,\n    totalCaloriesBurnedRunning: 0\n};\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    const totalSeconds = hours * 3600 + minutes * 60 + seconds;\n    return totalSeconds;\n}\n\n// Retrieve previous activity and time from flow context\nlet previousActivity = flow.get('previousActivity');\nlet previousTime = flow.get('previousTime');\n\n// Current activity time\nconst currentTime = parseTimeStringToSeconds(currentActivity.time);\n\n// Initialize duration\nlet duration = 0;\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\nif (previousTime !== undefined) {\n    // Calculate duration between current and previous activity\n    duration = currentTime - previousTime;\n\n    // Handle time crossing midnight\n    if (duration < 0) {\n        duration += 24 * 3600; // Add 24 hours in seconds\n    }\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        if (previousActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            cumulativeData.totalWalkDistance += distance;\n            cumulativeData.walkDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedWalking += caloriesBurned;\n\n        } else if (previousActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            cumulativeData.totalRunDistance += distance;\n            cumulativeData.runDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedRunning += caloriesBurned;\n        }\n    }\n}\n\n// Store current activity and time as previous for next message\nflow.set('previousActivity', currentActivity);\nflow.set('previousTime', currentTime);\n\n// Convert durations to minutes\nconst walkDurationMinutes = cumulativeData.walkDuration / 60;\nconst runDurationMinutes = cumulativeData.runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.daily.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.daily.run;\n\n// Prepare the result\nmsg.payload = {\n    totalWalkDistance: (cumulativeData.totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (cumulativeData.totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: cumulativeData.totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: cumulativeData.totalCaloriesBurnedRunning.toFixed(2),\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\n// Save cumulative data back to flow context\nflow.set('cumulativeData', cumulativeData);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 260,
+        "wires": [
+            [
+                "8250c638c836aac4",
+                "41ebf1644aa2e9ba",
+                "faf7d8dfb369cbe4",
+                "476b30f57fbe2a64",
+                "fd44e85aeecfbae0",
+                "a7f43f562bd0a46b",
+                "531397fe46717a21",
+                "c4af6e4e36efbdf3",
+                "314040bdbdf99975"
+            ]
+        ]
+    },
+    {
+        "id": "8250c638c836aac4",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Walk Distance [km]",
+        "format": "{{msg.payload.totalWalkDistance}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 990,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "41ebf1644aa2e9ba",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Run Distance [km]",
+        "format": "{{msg.payload.totalRunDistance}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 990,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "faf7d8dfb369cbe4",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Walk Duration [mins]",
+        "format": "{{msg.payload.walkDuration}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1000,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "476b30f57fbe2a64",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Run Duration [mins]",
+        "format": "{{msg.payload.runDuration}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1000,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "fd44e85aeecfbae0",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Burned Calories Walking",
+        "format": "{{msg.payload.totalCaloriesBurnedWalking}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1010,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a7f43f562bd0a46b",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Burned Calories Running",
+        "format": "{{msg.payload.totalCaloriesBurnedRunning}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1010,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "531397fe46717a21",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Walking Status",
+        "format": "{{msg.payload.activityStatus.walking}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 980,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "c4af6e4e36efbdf3",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Running Status",
+        "format": "{{msg.payload.activityStatus.running}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 980,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "aa069f28728c5f62",
+        "type": "join",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 590,
+        "y": 260,
+        "wires": [
+            [
+                "f6db7143d156713a"
+            ]
+        ]
+    },
+    {
+        "id": "71f70d9e72934c1c",
+        "type": "ui_form",
+        "z": "e2c48a538353d801",
+        "name": "user-data",
+        "label": "User Data",
+        "group": "e1a2f045e06dfd7f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Age",
+                "value": "age",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Height",
+                "value": "height",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Weight",
+                "value": "weight",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Gender",
+                "value": "gender",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "age": "",
+            "height": "",
+            "weight": "",
+            "gender": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 260,
+        "y": 580,
+        "wires": [
+            [
+                "831dc260262550c6",
+                "4de65841ef138320"
+            ]
+        ]
+    },
+    {
+        "id": "831dc260262550c6",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "user_data",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cf3605de2fbefd79",
+        "type": "ui_ui_control",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "events": "all",
+        "x": 100,
+        "y": 620,
+        "wires": [
+            [
+                "71f70d9e72934c1c",
+                "ef0f72cfdc66e022"
+            ]
+        ]
+    },
+    {
+        "id": "ef0f72cfdc66e022",
+        "type": "ui_form",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "label": "Activity Thresholds [mins+",
+        "group": "e1a2f045e06dfd7f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Walking",
+                "value": "walking",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Running",
+                "value": "running",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "walking": "",
+            "running": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 310,
+        "y": 660,
+        "wires": [
+            [
+                "a99edb7a187f58c3"
+            ]
+        ]
+    },
+    {
+        "id": "a99edb7a187f58c3",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "thresholds",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4de65841ef138320",
+        "type": "function",
+        "z": "e2c48a538353d801",
+        "name": "getVelocity",
+        "func": "const user_data = flow.get('user_data');\n\n// The velocity data table\nconst velocityData = [\n    { ageRange: \"20 to 29\", gender: \"Male\", velocity: 1.36 },\n    { ageRange: \"20 to 29\", gender: \"Female\", velocity: 1.34 },\n    { ageRange: \"30 to 39\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"30 to 39\", gender: \"Female\", velocity: 1.34 },\n    { ageRange: \"40 to 49\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"40 to 49\", gender: \"Female\", velocity: 1.39 },\n    { ageRange: \"50 to 59\", gender: \"Male\", velocity: 1.43 },\n    { ageRange: \"50 to 59\", gender: \"Female\", velocity: 1.31 },\n    { ageRange: \"60 to 69\", gender: \"Male\", velocity: 1.34 },\n    { ageRange: \"60 to 69\", gender: \"Female\", velocity: 1.24 },\n    { ageRange: \"70 to 79\", gender: \"Male\", velocity: 1.26 },\n    { ageRange: \"70 to 79\", gender: \"Female\", velocity: 1.13 },\n    { ageRange: \"80 to 89\", gender: \"Male\", velocity: 0.97 },\n    { ageRange: \"80 to 89\", gender: \"Female\", velocity: 0.94 }\n];\n\n// Function to map real age to an age range\nfunction mapAgeToRange(realAge) {\n    if (realAge >= 20 && realAge <= 29) return \"20 to 29\";\n    if (realAge >= 30 && realAge <= 39) return \"30 to 39\";\n    if (realAge >= 40 && realAge <= 49) return \"40 to 49\";\n    if (realAge >= 50 && realAge <= 59) return \"50 to 59\";\n    if (realAge >= 60 && realAge <= 69) return \"60 to 69\";\n    if (realAge >= 70 && realAge <= 79) return \"70 to 79\";\n    if (realAge >= 80 && realAge <= 89) return \"80 to 89\";\n    return null; // Out of range\n}\n\n// Extract the parameters from the input\nconst realAge = user_data.age; // E.g., 32\nvar gender = user_data.gender; // E.g., \"Male\"\nif (gender == 0) {\n    gender = \"Male\";\n}\nelse {\n    gender = \"Female\";\n}\n\n// Map the real age to an age range\nconst ageRange = mapAgeToRange(realAge);\n\nif (!ageRange) {\n    msg.payload = { error: \"Age is out of the supported range (20 to 89).\" };\n    return msg;\n}\n\n// Find the matching velocity from the table\nconst result = velocityData.find(\n    entry => entry.ageRange === ageRange && entry.gender === gender\n);\n\n// Return the velocity or an error message if no match is found\nif (result) {\n    msg.payload = { velocity: result.velocity };\n} else {\n    msg.payload = { error: \"No matching velocity found for the given parameters.\" };\n}\nmsg.topic = \"velocity\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 520,
+        "wires": [
+            [
+                "4aa521664d5945fb"
+            ]
+        ]
+    },
+    {
+        "id": "29a7ac1ede60de6d",
+        "type": "function",
+        "z": "e2c48a538353d801",
+        "name": "function 4",
+        "func": "delete msg.payload.activity;\ndelete msg.payload.date;\ndelete msg.payload.time;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "ec4b2c746a30f514"
+            ]
+        ]
+    },
+    {
+        "id": "4aa521664d5945fb",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "velocity",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "314040bdbdf99975",
+        "type": "debug",
+        "z": "e2c48a538353d801",
+        "name": "debug 1",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -852,8 +1313,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 900,
-        "y": 480,
+        "x": 960,
+        "y": 460,
         "wires": []
     }
 ]

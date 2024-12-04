@@ -92,20 +92,19 @@ inputs_train, inputs_test, output_train, output_test = train_test_split(inputs,
                                                                         test_size = 0.3,
                                                                         shuffle = True)
 
+# Vamos tentar um modelo com K Nearest Neighbors
 
-# Vamos tentar um modelo com Random Forest
-
-RF= RandomForestClassifier(n_estimators = 10, criterion = 'gini') # criterion = 'entropy'
-RF.fit(inputs_train, output_train)
+KNN = KNeighborsClassifier(n_neighbors = 6, weights = 'distance') # weights = 'univform'
+KNN.fit(inputs_train, output_train)
 
 # Vejamos a accuracy média nos dados de teste
-print('Accuracy:', RF.score(inputs_test, output_test))
+print('Accuracy:', KNN.score(inputs_test, output_test))
 
 # Vejamos o score F1
-output_predicted = RF.predict(inputs_test)
+output_predicted = KNN.predict(inputs_test)
 print('F1-score:', f1_score(output_test, output_predicted))
 print('Confusion matrix:')
 print(confusion_matrix(output_test, output_predicted, labels = [0.0, 1.0]))
 
 # Export model
-joblib.dump(RF, gzip.open('model/rf-model.dat.gz', "wb"))
+joblib.dump(KNN, gzip.open('model/knn-model.dat.gz', "wb"))
