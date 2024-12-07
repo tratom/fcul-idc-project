@@ -75,7 +75,7 @@
         "id": "8bd336bf9cb2e6f1",
         "type": "ui_base",
         "theme": {
-            "name": "theme-light",
+            "name": "theme-dark",
             "lightTheme": {
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
@@ -87,7 +87,8 @@
                 "default": "#097479",
                 "baseColor": "#097479",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
+                "edited": true,
+                "reset": false
             },
             "customTheme": {
                 "name": "Untitled Theme 1",
@@ -97,44 +98,44 @@
             },
             "themeState": {
                 "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
+                    "default": "#097479",
+                    "value": "#097479",
                     "edited": false
                 },
                 "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
+                    "value": "#097479",
                     "edited": false
                 },
                 "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "widget-textColor": {
                     "value": "#111111",
                     "edited": false
                 },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
                 "widget-backgroundColor": {
-                    "value": "#0094ce",
+                    "value": "#097479",
                     "edited": false
                 },
                 "widget-borderColor": {
-                    "value": "#ffffff",
+                    "value": "#333333",
                     "edited": false
                 },
                 "base-font": {
@@ -175,7 +176,7 @@
         "tab": "4e4a2383db18e3c3",
         "order": 1,
         "disp": true,
-        "width": "6",
+        "width": 24,
         "collapse": false,
         "className": ""
     },
@@ -218,24 +219,13 @@
         "hidden": false
     },
     {
-        "id": "9fb89ab32f39261e",
-        "type": "ui_group",
-        "name": "User Data",
-        "tab": "4e4a2383db18e3c3",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
         "id": "032063b9cbd6eb32",
         "type": "ui_group",
-        "name": "Thresholds",
+        "name": "Controls",
         "tab": "4e4a2383db18e3c3",
         "order": 3,
         "disp": true,
-        "width": "6",
+        "width": 6,
         "collapse": false,
         "className": ""
     },
@@ -261,8 +251,8 @@
         "z": "acebf30b628324b0",
         "name": "user-data",
         "label": "User Data",
-        "group": "9fb89ab32f39261e",
-        "order": 0,
+        "group": "032063b9cbd6eb32",
+        "order": 1,
         "width": 0,
         "height": 0,
         "options": [
@@ -322,7 +312,7 @@
         "z": "acebf30b628324b0",
         "name": "date_range",
         "label": "Date Range",
-        "group": "62f15109aa2f90a2",
+        "group": "032063b9cbd6eb32",
         "order": 2,
         "width": 0,
         "height": 0,
@@ -407,7 +397,7 @@
         "type": "function",
         "z": "acebf30b628324b0",
         "name": "compute",
-        "func": "// Extract activity, user data, and velocity from msg.payload\nconst activities = msg.payload.activities; // Array of activities\nconst userData = flow.get(\"user_data\"); // User information\nconst velocity = msg.payload.velocity.velocity; // Global velocity for all activities\n\n// Validate the input\nif (!Array.isArray(activities) || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activities, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Get thresholds from flow context\nconst thresholds_values = flow.get('thresholds');\nconst thresholds = {\n    daily: {\n        walk: thresholds_values.walking,\n        run: thresholds_values.running\n    },\n    weekly: {\n        walk: thresholds_values.walking * 7,\n        run: thresholds_values.running * 7\n    },\n    monthly: {\n        walk: thresholds_values.walking * 30,\n        run: thresholds_values.running * 30\n    }\n\n};\n\nif (!thresholds || !thresholds.daily) {\n    node.warn(\"Daily thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Daily thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Variables to store totals\nlet totalWalkDistance = 0; // in meters\nlet totalRunDistance = 0; // in meters\nlet walkDuration = 0; // in seconds\nlet runDuration = 0; // in seconds\nlet totalCaloriesBurnedWalking = 0;\nlet totalCaloriesBurnedRunning = 0;\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    const totalSeconds = hours * 3600 + minutes * 60 + seconds;\n    return totalSeconds;\n}\n\n// Sort activities by time to ensure correct order\nactivities.sort((a, b) => parseTimeStringToSeconds(a.time) - parseTimeStringToSeconds(b.time));\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\n// Process activities\nfor (let i = 0; i < activities.length - 1; i++) {\n    const currentActivity = activities[i];\n    const nextActivity = activities[i + 1];\n\n    const currentTime = parseTimeStringToSeconds(currentActivity.time);\n    const nextTime = parseTimeStringToSeconds(nextActivity.time);\n    let duration = nextTime - currentTime; // Duration in seconds\n\n    // Handle time crossing midnight\n    if (duration < 0) {\n        duration += 24 * 3600; // Add 24 hours in seconds\n    }\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        if (currentActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            totalWalkDistance += distance;\n            walkDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedWalking += caloriesBurned;\n\n        } else if (currentActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            totalRunDistance += distance;\n            runDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedRunning += caloriesBurned;\n        }\n    }\n}\n\n// Convert durations to minutes\nconst walkDurationMinutes = walkDuration / 60;\nconst runDurationMinutes = runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.daily.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.daily.run;\n\n// Prepare the result\nmsg.payload = {\n    totalWalkDistance: (totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: totalCaloriesBurnedRunning.toFixed(2),\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\nreturn msg;\n",
+        "func": "// Extract activity, user data, and velocity from msg.payload\nconst activities = msg.payload.activities; // Array of activities\nconst userData = flow.get(\"user_data\"); // User information\nconst velocity = msg.payload.velocity.velocity; // Global velocity for all activities\n\n// Validate the input\nif (!Array.isArray(activities) || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activities, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Check thresholds\nconst thresholds_values = flow.get('thresholds');\nif (!thresholds_values || typeof thresholds_values.walking !== 'number' || typeof thresholds_values.running !== 'number') {\n    node.warn(\"Thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    return hours * 3600 + minutes * 60 + seconds;\n}\n\n// Convert activity date/time to a single Date object\nfunction getActivityDateTime(activity) {\n    const baseDate = new Date(activity.date);\n    const totalSeconds = parseTimeStringToSeconds(activity.time);\n    const dateWithTime = new Date(baseDate.getTime() + totalSeconds * 1000);\n    return dateWithTime;\n}\n\n// Determine earliest and latest activity dates\nlet earliestDate = null;\nlet latestDate = null;\n\n// Convert all activity date/time into Date objects\nconst activitiesWithDate = activities.map(act => {\n    const dt = getActivityDateTime(act);\n    if (!earliestDate || dt < earliestDate) earliestDate = dt;\n    if (!latestDate || dt > latestDate) latestDate = dt;\n    return { ...act, dateTime: dt };\n});\n\nif (!earliestDate || !latestDate) {\n    msg.payload = { error: \"No valid activity dates found.\" };\n    return msg;\n}\n\n// Calculate daysInRange\nconst timeDiff = latestDate.getTime() - earliestDate.getTime();\nconst daysInRange = Math.max(1, Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));\n\n// Multiply thresholds by the number of days in the range\nconst thresholds = {\n    walk: thresholds_values.walking * daysInRange,\n    run: thresholds_values.running * daysInRange\n};\n\n// Variables to store totals\nlet totalWalkDistance = 0; // in meters\nlet totalRunDistance = 0; // in meters\nlet walkDuration = 0; // in seconds\nlet runDuration = 0; // in seconds\nlet totalCaloriesBurnedWalking = 0;\nlet totalCaloriesBurnedRunning = 0;\n\n// A helper to get the day's start timestamp (midnight) for grouping\nfunction getDayStartTimestamp(date) {\n    return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();\n}\n\n// Daily stats object: { dayKey: { walkDistance, runDistance, walkDuration, runDuration, caloriesWalk, caloriesRun } }\nlet dailyStats = {};\n\nfunction ensureDayEntry(dayKey) {\n    if (!dailyStats[dayKey]) {\n        dailyStats[dayKey] = {\n            walkDistance: 0,\n            runDistance: 0,\n            walkDuration: 0,\n            runDuration: 0,\n            caloriesWalk: 0,\n            caloriesRun: 0\n        };\n    }\n}\n\n// Sort activities by their exact dateTime\nactivitiesWithDate.sort((a, b) => a.dateTime - b.dateTime);\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\n// Process activities\nfor (let i = 0; i < activitiesWithDate.length - 1; i++) {\n    const currentActivity = activitiesWithDate[i];\n    const nextActivity = activitiesWithDate[i + 1];\n\n    const currentTime = currentActivity.dateTime.getTime() / 1000;\n    const nextTime = nextActivity.dateTime.getTime() / 1000;\n    let duration = nextTime - currentTime; // Duration in seconds\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        const dayKey = getDayStartTimestamp(currentActivity.dateTime);\n\n        if (currentActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            totalWalkDistance += distance;\n            walkDuration += duration;\n\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedWalking += caloriesBurned;\n\n            ensureDayEntry(dayKey);\n            dailyStats[dayKey].walkDistance += distance;\n            dailyStats[dayKey].walkDuration += duration;\n            dailyStats[dayKey].caloriesWalk += caloriesBurned;\n\n        } else if (currentActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            totalRunDistance += distance;\n            runDuration += duration;\n\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedRunning += caloriesBurned;\n\n            ensureDayEntry(dayKey);\n            dailyStats[dayKey].runDistance += distance;\n            dailyStats[dayKey].runDuration += duration;\n            dailyStats[dayKey].caloriesRun += caloriesBurned;\n        }\n    }\n}\n\n// Convert total durations to minutes\nconst walkDurationMinutes = walkDuration / 60;\nconst runDurationMinutes = runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.run;\n\n// Sort the days in ascending order\nconst dayKeys = Object.keys(dailyStats).map(k => parseInt(k)).sort((a, b) => a - b);\n\n// Build data arrays for each metric\nconst walkDistanceData = [];\nconst runDistanceData = [];\nconst walkDurationData = [];\nconst runDurationData = [];\nconst caloriesWalkData = [];\nconst caloriesRunData = [];\n\nfor (const dayKey of dayKeys) {\n    const dayStat = dailyStats[dayKey];\n    walkDistanceData.push({ x: dayKey, y: (dayStat.walkDistance / 1000) }); // convert to km\n    runDistanceData.push({ x: dayKey, y: (dayStat.runDistance / 1000) }); // convert to km\n    walkDurationData.push({ x: dayKey, y: (dayStat.walkDuration / 60) }); // convert to minutes\n    runDurationData.push({ x: dayKey, y: (dayStat.runDuration / 60) }); // convert to minutes\n    caloriesWalkData.push({ x: dayKey, y: dayStat.caloriesWalk });\n    caloriesRunData.push({ x: dayKey, y: dayStat.caloriesRun });\n}\n\n// Prepare separate payloads for each metric\n// Each chart data structure: { series: [string], data: [ [ {x, y}, ... ] ], labels: [string] }\nconst walkDistanceChart = [{\n    series: [\"Walk Distance\"],\n    data: [walkDistanceData],\n    labels: [\"Walk Distance\"]\n}];\n\nconst runDistanceChart = [{\n    series: [\"Run Distance\"],\n    data: [runDistanceData],\n    labels: [\"Run Distance\"]\n}];\n\nconst walkDurationChart = [{\n    series: [\"Walk Duration\"],\n    data: [walkDurationData],\n    labels: [\"Walk Duration\"]\n}];\n\nconst runDurationChart = [{\n    series: [\"Run Duration\"],\n    data: [runDurationData],\n    labels: [\"Run Duration\"]\n}];\n\nconst caloriesWalkChart = [{\n    series: [\"Calories Walking\"],\n    data: [caloriesWalkData],\n    labels: [\"Calories Walking\"]\n}];\n\nconst caloriesRunChart = [{\n    series: [\"Calories Running\"],\n    data: [caloriesRunData],\n    labels: [\"Calories Running\"]\n}];\n\n// Also include the aggregate statistics in a separate object\nconst aggregate = {\n    totalWalkDistance: (totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: totalCaloriesBurnedRunning.toFixed(2),\n    daysInRange: daysInRange,\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\n// Now put them all together in a single payload object, but separated by metric\nmsg.payload = {\n    walkDistanceChart,\n    runDistanceChart,\n    walkDurationChart,\n    runDurationChart,\n    caloriesWalkChart,\n    caloriesRunChart,\n    aggregate\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -425,7 +415,14 @@
                 "fd54e444a8e1e88d",
                 "292cf0ea10b7014a",
                 "3b933677af634d7e",
-                "f8641075ce821613"
+                "f8641075ce821613",
+                "1ab0922030c7f638",
+                "b55a0865b8e1b534",
+                "3a640ec104a3982b",
+                "67537e954dec5c3e",
+                "bdbadbc0bf008389",
+                "c94dfc52d47db55c",
+                "1fe61399c4d7edc6"
             ]
         ]
     },
@@ -491,11 +488,11 @@
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Walk Distance [km]",
-        "format": "{{msg.payload.totalWalkDistance}}",
+        "format": "{{msg.payload.aggregate.totalWalkDistance}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -511,12 +508,12 @@
         "type": "ui_text",
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 5,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Run Distance [km]",
-        "format": "{{msg.payload.totalRunDistance}}",
+        "format": "{{msg.payload.aggregate.totalRunDistance}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -532,12 +529,12 @@
         "type": "ui_text",
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 2,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Walk Duration [mins]",
-        "format": "{{msg.payload.walkDuration}}",
+        "format": "{{msg.payload.aggregate.walkDuration}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -553,12 +550,12 @@
         "type": "ui_text",
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 6,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Run Duration [mins]",
-        "format": "{{msg.payload.runDuration}}",
+        "format": "{{msg.payload.aggregate.runDuration}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -574,12 +571,12 @@
         "type": "ui_text",
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 9,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Burned Calories Walking",
-        "format": "{{msg.payload.totalCaloriesBurnedWalking}}",
+        "format": "{{msg.payload.aggregate.totalCaloriesBurnedWalking}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -595,12 +592,12 @@
         "type": "ui_text",
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 10,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Burned Calories Running",
-        "format": "{{msg.payload.totalCaloriesBurnedRunning}}",
+        "format": "{{msg.payload.aggregate.totalCaloriesBurnedRunning}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -616,12 +613,12 @@
         "type": "ui_text",
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
-        "order": 8,
-        "width": 0,
-        "height": 0,
+        "order": 14,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Walking Status",
-        "format": "{{msg.payload.activityStatus.walking}}",
+        "format": "{{msg.payload.aggregate.activityStatus.walking}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -637,12 +634,12 @@
         "type": "ui_text",
         "z": "acebf30b628324b0",
         "group": "62f15109aa2f90a2",
-        "order": 7,
-        "width": 0,
-        "height": 0,
+        "order": 13,
+        "width": 12,
+        "height": 1,
         "name": "",
         "label": "Running Status",
-        "format": "{{msg.payload.activityStatus.running}}",
+        "format": "{{msg.payload.aggregate.activityStatus.running}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -660,7 +657,7 @@
         "name": "",
         "label": "Activity Thresholds [mins]",
         "group": "032063b9cbd6eb32",
-        "order": 0,
+        "order": 3,
         "width": 0,
         "height": 0,
         "options": [
@@ -780,7 +777,7 @@
         "type": "postgresql",
         "z": "acebf30b628324b0",
         "name": "",
-        "query": "SELECT time, activity\nFROM activity \nWHERE date BETWEEN $1 AND $2;",
+        "query": "SELECT date,time, activity\nFROM activity \nWHERE date BETWEEN $1 AND $2;",
         "postgreSQLConfig": "f77c186364b39603",
         "split": false,
         "rowsPerMsg": 1,
@@ -790,6 +787,448 @@
         "wires": [
             [
                 "1cfafbebab71a9df"
+            ]
+        ]
+    },
+    {
+        "id": "be7326b1df961927",
+        "type": "ui_chart",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "group": "62f15109aa2f90a2",
+        "order": 3,
+        "width": 12,
+        "height": 6,
+        "label": "Walk Distance",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1640,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ab0922030c7f638",
+        "type": "debug",
+        "z": "acebf30b628324b0",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b55a0865b8e1b534",
+        "type": "change",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.walkDistanceChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1370,
+        "y": 520,
+        "wires": [
+            [
+                "be7326b1df961927"
+            ]
+        ]
+    },
+    {
+        "id": "217f7139aa267107",
+        "type": "ui_chart",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "group": "62f15109aa2f90a2",
+        "order": 7,
+        "width": 12,
+        "height": 6,
+        "label": "Run Distance",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1640,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a640ec104a3982b",
+        "type": "change",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.runDistanceChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1370,
+        "y": 560,
+        "wires": [
+            [
+                "217f7139aa267107"
+            ]
+        ]
+    },
+    {
+        "id": "fe7c2cf68b42f134",
+        "type": "ui_chart",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "group": "62f15109aa2f90a2",
+        "order": 4,
+        "width": 12,
+        "height": 6,
+        "label": "Walk Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1630,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67537e954dec5c3e",
+        "type": "change",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.walkDurationChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1370,
+        "y": 600,
+        "wires": [
+            [
+                "fe7c2cf68b42f134"
+            ]
+        ]
+    },
+    {
+        "id": "60db9b6d4d42a914",
+        "type": "ui_chart",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "group": "62f15109aa2f90a2",
+        "order": 8,
+        "width": 12,
+        "height": 6,
+        "label": "Run Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1620,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bdbadbc0bf008389",
+        "type": "change",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.runDurationChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1370,
+        "y": 640,
+        "wires": [
+            [
+                "60db9b6d4d42a914"
+            ]
+        ]
+    },
+    {
+        "id": "2c7a7d1d59b25b9f",
+        "type": "ui_chart",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "group": "62f15109aa2f90a2",
+        "order": 11,
+        "width": 12,
+        "height": 6,
+        "label": "Walk Calories",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1640,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c94dfc52d47db55c",
+        "type": "change",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.caloriesWalkChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1370,
+        "y": 680,
+        "wires": [
+            [
+                "2c7a7d1d59b25b9f"
+            ]
+        ]
+    },
+    {
+        "id": "0c1807e6a2e6f24d",
+        "type": "ui_chart",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "group": "62f15109aa2f90a2",
+        "order": 12,
+        "width": 12,
+        "height": 6,
+        "label": "Run Calories",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "4",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1630,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1fe61399c4d7edc6",
+        "type": "change",
+        "z": "acebf30b628324b0",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.caloriesRunChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1370,
+        "y": 720,
+        "wires": [
+            [
+                "0c1807e6a2e6f24d"
             ]
         ]
     },
@@ -809,11 +1248,12 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 430,
-        "y": 220,
+        "x": 270,
+        "y": 260,
         "wires": [
             [
-                "aa069f28728c5f62"
+                "9f89ee5b5e6bb513",
+                "f6db7143d156713a"
             ]
         ]
     },
@@ -822,7 +1262,7 @@
         "type": "mqtt in",
         "z": "e2c48a538353d801",
         "name": "",
-        "topic": "iot/activity",
+        "topic": "idc/FC64699",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "de5ee2193d03dd1b",
@@ -830,12 +1270,11 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 100,
+        "x": 90,
         "y": 260,
         "wires": [
             [
-                "aa069f28728c5f62",
-                "29a7ac1ede60de6d"
+                "ec4b2c746a30f514"
             ]
         ]
     },
@@ -844,14 +1283,14 @@
         "type": "function",
         "z": "e2c48a538353d801",
         "name": "compute",
-        "func": "// Extract activity data from msg.payload\nconst currentActivity = {\n    \"date\": msg.payload[0].date,\n    \"time\": msg.payload[0].time,\n    \"activity\": msg.payload[1].prediction\n}\nconst userData = flow.get(\"user_data\"); // User information\nconst velocity = Number(flow.get(\"velocity\")); // Retrieve global velocity from flow context\n\n// Validate the input\nif (!currentActivity || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activity, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Get thresholds from flow context\nconst thresholds_values = flow.get('thresholds');\nconst thresholds = {\n    daily: {\n        walk: thresholds_values.walking,\n        run: thresholds_values.running\n    }\n};\n\nif (!thresholds || !thresholds.daily) {\n    node.warn(\"Daily thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Daily thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Get cumulative totals from flow context or initialize if not present\nlet cumulativeData = flow.get('cumulativeData') || {\n    totalWalkDistance: 0, // in meters\n    totalRunDistance: 0, // in meters\n    walkDuration: 0, // in seconds\n    runDuration: 0, // in seconds\n    totalCaloriesBurnedWalking: 0,\n    totalCaloriesBurnedRunning: 0\n};\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    const totalSeconds = hours * 3600 + minutes * 60 + seconds;\n    return totalSeconds;\n}\n\n// Retrieve previous activity and time from flow context\nlet previousActivity = flow.get('previousActivity');\nlet previousTime = flow.get('previousTime');\n\n// Current activity time\nconst currentTime = parseTimeStringToSeconds(currentActivity.time);\n\n// Initialize duration\nlet duration = 0;\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\nif (previousTime !== undefined) {\n    // Calculate duration between current and previous activity\n    duration = currentTime - previousTime;\n\n    // Handle time crossing midnight\n    if (duration < 0) {\n        duration += 24 * 3600; // Add 24 hours in seconds\n    }\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        if (previousActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            cumulativeData.totalWalkDistance += distance;\n            cumulativeData.walkDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedWalking += caloriesBurned;\n\n        } else if (previousActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            cumulativeData.totalRunDistance += distance;\n            cumulativeData.runDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedRunning += caloriesBurned;\n        }\n    }\n}\n\n// Store current activity and time as previous for next message\nflow.set('previousActivity', currentActivity);\nflow.set('previousTime', currentTime);\n\n// Convert durations to minutes\nconst walkDurationMinutes = cumulativeData.walkDuration / 60;\nconst runDurationMinutes = cumulativeData.runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.daily.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.daily.run;\n\n// Prepare the result\nmsg.payload = {\n    totalWalkDistance: (cumulativeData.totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (cumulativeData.totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: cumulativeData.totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: cumulativeData.totalCaloriesBurnedRunning.toFixed(2),\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\n// Save cumulative data back to flow context\nflow.set('cumulativeData', cumulativeData);\n\nreturn msg;",
+        "func": "// Extract activity data from msg.payload\nconst currentActivity = {\n    \"date\": msg.payload.data.date,\n    \"time\": msg.payload.data.time,\n    \"activity\": msg.payload.prediction\n}\nconst userData = flow.get(\"user_data\"); // User information\nconst velocity = Number(flow.get(\"velocity\")); // Retrieve global velocity from flow context\n\n// Validate the input\nif (!currentActivity || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activity, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Get thresholds from flow context\nconst thresholds_values = flow.get('thresholds');\nconst thresholds = {\n    daily: {\n        walk: thresholds_values.walking,\n        run: thresholds_values.running\n    }\n};\n\nif (!thresholds || !thresholds.daily) {\n    node.warn(\"Daily thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Daily thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Get cumulative totals from flow context or initialize if not present\nlet cumulativeData = flow.get('cumulativeData') || {\n    totalWalkDistance: 0, // in meters\n    totalRunDistance: 0, // in meters\n    walkDuration: 0, // in seconds\n    runDuration: 0, // in seconds\n    totalCaloriesBurnedWalking: 0,\n    totalCaloriesBurnedRunning: 0\n};\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    const totalSeconds = hours * 3600 + minutes * 60 + seconds;\n    return totalSeconds;\n}\n\n// Retrieve previous activity and time from flow context\nlet previousActivity = flow.get('previousActivity');\nlet previousTime = flow.get('previousTime');\n\n// Current activity time\nconst currentTime = parseTimeStringToSeconds(currentActivity.time);\n\n// Initialize duration\nlet duration = 0;\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\nif (previousTime !== undefined) {\n    // Calculate duration between current and previous activity\n    duration = currentTime - previousTime;\n\n    // Handle time crossing midnight\n    if (duration < 0) {\n        duration += 24 * 3600; // Add 24 hours in seconds\n    }\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        if (previousActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            cumulativeData.totalWalkDistance += distance;\n            cumulativeData.walkDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedWalking += caloriesBurned;\n\n        } else if (previousActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            cumulativeData.totalRunDistance += distance;\n            cumulativeData.runDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedRunning += caloriesBurned;\n        }\n    }\n}\n\n// Store current activity and time as previous for next message\nflow.set('previousActivity', currentActivity);\nflow.set('previousTime', currentTime);\n\n// Convert durations to minutes\nconst walkDurationMinutes = cumulativeData.walkDuration / 60;\nconst runDurationMinutes = cumulativeData.runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.daily.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.daily.run;\n\n// Prepare the result\nmsg.payload = {\n    totalWalkDistance: (cumulativeData.totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (cumulativeData.totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: cumulativeData.totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: cumulativeData.totalCaloriesBurnedRunning.toFixed(2),\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\n// Save cumulative data back to flow context\nflow.set('cumulativeData', cumulativeData);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 740,
+        "x": 800,
         "y": 260,
         "wires": [
             [
@@ -863,8 +1302,7 @@
                 "a7f43f562bd0a46b",
                 "531397fe46717a21",
                 "c4af6e4e36efbdf3",
-                "314040bdbdf99975",
-                "e2e1b2c9bc32dcb3"
+                "314040bdbdf99975"
             ]
         ]
     },
@@ -885,7 +1323,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 990,
+        "x": 1050,
         "y": 120,
         "wires": []
     },
@@ -906,7 +1344,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 990,
+        "x": 1050,
         "y": 160,
         "wires": []
     },
@@ -927,7 +1365,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1000,
+        "x": 1060,
         "y": 200,
         "wires": []
     },
@@ -948,7 +1386,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1000,
+        "x": 1060,
         "y": 240,
         "wires": []
     },
@@ -969,7 +1407,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1010,
+        "x": 1070,
         "y": 280,
         "wires": []
     },
@@ -990,7 +1428,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1010,
+        "x": 1070,
         "y": 320,
         "wires": []
     },
@@ -1011,7 +1449,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 980,
+        "x": 1040,
         "y": 360,
         "wires": []
     },
@@ -1032,38 +1470,9 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 980,
+        "x": 1040,
         "y": 400,
         "wires": []
-    },
-    {
-        "id": "aa069f28728c5f62",
-        "type": "join",
-        "z": "e2c48a538353d801",
-        "name": "",
-        "mode": "custom",
-        "build": "array",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "useparts": false,
-        "accumulate": false,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 590,
-        "y": 260,
-        "wires": [
-            [
-                "f6db7143d156713a"
-            ]
-        ]
     },
     {
         "id": "71f70d9e72934c1c",
@@ -1258,26 +1667,6 @@
         ]
     },
     {
-        "id": "29a7ac1ede60de6d",
-        "type": "function",
-        "z": "e2c48a538353d801",
-        "name": "function 4",
-        "func": "delete msg.payload.activity;\ndelete msg.payload.date;\ndelete msg.payload.time;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 220,
-        "wires": [
-            [
-                "ec4b2c746a30f514"
-            ]
-        ]
-    },
-    {
         "id": "4aa521664d5945fb",
         "type": "change",
         "z": "e2c48a538353d801",
@@ -1307,103 +1696,50 @@
         "type": "debug",
         "z": "e2c48a538353d801",
         "name": "debug 1",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 960,
+        "x": 1020,
         "y": 460,
         "wires": []
     },
     {
-        "id": "77f8d02ca89eeb9d",
-        "type": "ui_chart",
+        "id": "71556706acc55ee2",
+        "type": "postgresql",
         "z": "e2c48a538353d801",
         "name": "",
-        "group": "d18297c87373db73",
-        "order": 8,
-        "width": 0,
-        "height": 0,
-        "label": "chart",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
+        "query": "insert into \n  activity (\n    \"date\", \n    \"time\", \n    activity, \n    acceleration_x, \n    acceleration_y, \n    acceleration_z, \n    gyro_x, \n    gyro_y, \n    gyro_z\n  )\nvalues\n  (\n    $1, \n    $2, \n    $3, \n    $4, \n    $5, \n    $6, \n    $7, \n    $8, \n    $9\n  );",
+        "postgreSQLConfig": "f77c186364b39603",
+        "split": false,
+        "rowsPerMsg": 1,
         "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1230,
-        "y": 460,
+        "x": 790,
+        "y": 320,
         "wires": [
             []
         ]
     },
     {
-        "id": "072cce5604db10ab",
+        "id": "9f89ee5b5e6bb513",
         "type": "function",
         "z": "e2c48a538353d801",
         "name": "function 5",
-        "func": "const distance = msg.payload('runDuration');\n\nreturn distance;",
+        "func": "msg.params = [\n    msg.payload.data.date,\n    msg.payload.data.time,\n    msg.payload.prediction,\n    msg.payload.data.acceleration_x,\n    msg.payload.data.acceleration_y,\n    msg.payload.data.acceleration_z,\n    msg.payload.data.gyro_x,\n    msg.payload.data.gyro_y,\n    msg.payload.data.gyro_z,\n\n]\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 960,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e2e1b2c9bc32dcb3",
-        "type": "change",
-        "z": "e2c48a538353d801",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.runDuration",
-                "pt": "msg",
-                "to": "runDuration",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1080,
-        "y": 620,
+        "x": 600,
+        "y": 320,
         "wires": [
             [
-                "77f8d02ca89eeb9d"
+                "71556706acc55ee2"
             ]
         ]
     }

@@ -6,8 +6,6 @@ from flask import Flask
 from flask import request
 import pandas as pd
 import joblib
-import gzip
-import json
 
 from modules.functions import get_model_response
 
@@ -54,6 +52,13 @@ def health():
 def predict():
     feature_dict = request.get_json()
     print(feature_dict)
+    data = dict(feature_dict)
+
+    if "date" in feature_dict:
+        feature_dict.pop("date")
+    if "time" in feature_dict:
+        feature_dict.pop("time")
+
     if not feature_dict:
         return {
             'error': 'Body is empty.'
@@ -68,7 +73,12 @@ def predict():
         scaled_data = scale_values(feature_dict)
         
         # Wrap scaled_data into a list before passing to the model
-        response = get_model_response([scaled_data], model)
+        response = {
+            "prediction": get_model_response([scaled_data], model)["prediction"],
+            "data": data
+        }
+        
+        
     except ValueError as e:
         print(e)
         return {'error': str(e).split('\n')}, 500
