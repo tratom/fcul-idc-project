@@ -4,17 +4,17 @@ import time
 import json
 from sklearn.metrics import confusion_matrix, classification_report
 
-# Endpoint del server
+# Endpoint of the server
 url = "http://localhost:8000/predict"
 
-# File dei dati
+# File of data
 file_path = "test.csv"
 
 # Initialize lists to store expected and predicted activities
 expected_activities = []
 predicted_activities = []
 
-# Funzione per inviare dati
+# Function to send data
 def send_data(data):
     headers = {"Content-Type": "application/json"}
     payload = {
@@ -25,15 +25,15 @@ def send_data(data):
         "gyro_y": float(data["gyro_y"]),
         "gyro_z": float(data["gyro_z"])
     }
-    expected_activity = data["activity"]  # L'attività attesa dal CSV
+    expected_activity = data["activity"]  # The activity from the csv file
     expected_activities.append(int(expected_activity))  # Append to expected list
     
     try:
         response = requests.post(url, json=payload, headers=headers)
-        response_data = response.json()  # Supponendo che il server restituisca una risposta JSON
+        response_data = response.json()  # Assuming the server returns a JSON response
         
-        # Confronta l'attività attesa con la risposta
-        predicted_activity = int(response_data.get("prediction"))  # Adatta questa chiave al tuo JSON di risposta
+        # Confront the activity against the anwser
+        predicted_activity = int(response_data.get("prediction"))  # Adapt this key to your response JSON
         predicted_activities.append(predicted_activity)  # Append to predicted list
         
         match = "CORRECT" if str(predicted_activity) == expected_activity else "INCORRECT"
@@ -42,12 +42,12 @@ def send_data(data):
     except Exception as e:
         print(f"Errore durante l'invio dei dati: {e}")
 
-# Legge i dati dal file CSV e invia le richieste
+# Load the csv file
 with open(file_path, mode='r') as file:
     reader = csv.DictReader(file, delimiter=';')
     for row in reader:
         send_data(row)
-        time.sleep(0.1)  # Pausa tra le richieste per evitare sovraccarico del server
+        time.sleep(0.1)  # Do a break between sending the data
 
 # Calculate and display the confusion matrix
 if expected_activities and predicted_activities:

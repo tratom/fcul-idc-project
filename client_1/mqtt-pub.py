@@ -32,7 +32,7 @@ topic = "idc/FC64699"
 # File dei dati
 file_path = "online.data"
 
-# Legge i dati dal file CSV e invia le richieste
+# Load the data from the CSV file
 with open(file_path, mode='r') as file:
     reader = csv.DictReader(file, delimiter=';')
     for row in reader:
@@ -42,6 +42,6 @@ with open(file_path, mode='r') as file:
         row['date'] = now.strftime("%Y-%m-%d")
         row['time'] = now.strftime("%H:%M:%S.%f")
         client.publish(topic, json.dumps(row))
-        time.sleep(1)  # Pausa tra le richieste per evitare sovraccarico del server
+        time.sleep(1)  # Do a break between sending the data
 
 client.loop_stop()
