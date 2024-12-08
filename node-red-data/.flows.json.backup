@@ -187,7 +187,7 @@
         "tab": "23362710de61490b",
         "order": 1,
         "disp": true,
-        "width": "6",
+        "width": 24,
         "collapse": false,
         "className": ""
     },
@@ -202,7 +202,7 @@
     {
         "id": "e1a2f045e06dfd7f",
         "type": "ui_group",
-        "name": "User Data",
+        "name": "Controls",
         "tab": "23362710de61490b",
         "order": 2,
         "disp": true,
@@ -313,7 +313,7 @@
         "name": "date_range",
         "label": "Date Range",
         "group": "032063b9cbd6eb32",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "options": [
@@ -491,7 +491,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Walk Distance [km]",
+        "label": "Total Walk Distance [km]",
         "format": "{{msg.payload.aggregate.totalWalkDistance}}",
         "layout": "row-spread",
         "className": "",
@@ -499,7 +499,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1650,
+        "x": 1670,
         "y": 120,
         "wires": []
     },
@@ -512,7 +512,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Run Distance [km]",
+        "label": "Total Run Distance [km]",
         "format": "{{msg.payload.aggregate.totalRunDistance}}",
         "layout": "row-spread",
         "className": "",
@@ -520,7 +520,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1650,
+        "x": 1670,
         "y": 160,
         "wires": []
     },
@@ -533,7 +533,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Walk Duration [mins]",
+        "label": "Total Walk Duration [mins]",
         "format": "{{msg.payload.aggregate.walkDuration}}",
         "layout": "row-spread",
         "className": "",
@@ -541,7 +541,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1660,
+        "x": 1670,
         "y": 200,
         "wires": []
     },
@@ -554,7 +554,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Run Duration [mins]",
+        "label": "Total Run Duration [mins]",
         "format": "{{msg.payload.aggregate.runDuration}}",
         "layout": "row-spread",
         "className": "",
@@ -562,7 +562,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1660,
+        "x": 1670,
         "y": 240,
         "wires": []
     },
@@ -575,7 +575,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Burned Calories Walking",
+        "label": "Total Burned Calories Walking",
         "format": "{{msg.payload.aggregate.totalCaloriesBurnedWalking}}",
         "layout": "row-spread",
         "className": "",
@@ -583,7 +583,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1670,
+        "x": 1690,
         "y": 280,
         "wires": []
     },
@@ -596,7 +596,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Burned Calories Running",
+        "label": "Total Burned Calories Running",
         "format": "{{msg.payload.aggregate.totalCaloriesBurnedRunning}}",
         "layout": "row-spread",
         "className": "",
@@ -604,7 +604,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1670,
+        "x": 1690,
         "y": 320,
         "wires": []
     },
@@ -617,7 +617,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Walking Status",
+        "label": "Total Walking Status",
         "format": "{{msg.payload.aggregate.activityStatus.walking}}",
         "layout": "row-spread",
         "className": "",
@@ -625,7 +625,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1640,
+        "x": 1660,
         "y": 360,
         "wires": []
     },
@@ -638,7 +638,7 @@
         "width": 12,
         "height": 1,
         "name": "",
-        "label": "Running Status",
+        "label": "Total Running Status",
         "format": "{{msg.payload.aggregate.activityStatus.running}}",
         "layout": "row-spread",
         "className": "",
@@ -646,7 +646,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1640,
+        "x": 1660,
         "y": 400,
         "wires": []
     },
@@ -657,7 +657,7 @@
         "name": "",
         "label": "Activity Thresholds [mins]",
         "group": "032063b9cbd6eb32",
-        "order": 3,
+        "order": 2,
         "width": 0,
         "height": 0,
         "options": [
@@ -829,7 +829,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1640,
-        "y": 520,
+        "y": 480,
         "wires": [
             []
         ]
@@ -870,7 +870,7 @@
         "to": "",
         "reg": false,
         "x": 1370,
-        "y": 520,
+        "y": 480,
         "wires": [
             [
                 "be7326b1df961927"
@@ -916,7 +916,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1640,
-        "y": 560,
+        "y": 520,
         "wires": [
             []
         ]
@@ -941,7 +941,7 @@
         "to": "",
         "reg": false,
         "x": 1370,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
                 "217f7139aa267107"
@@ -987,7 +987,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1630,
-        "y": 600,
+        "y": 560,
         "wires": [
             []
         ]
@@ -1012,7 +1012,7 @@
         "to": "",
         "reg": false,
         "x": 1370,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "fe7c2cf68b42f134"
@@ -1058,7 +1058,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1620,
-        "y": 640,
+        "y": 600,
         "wires": [
             []
         ]
@@ -1083,7 +1083,7 @@
         "to": "",
         "reg": false,
         "x": 1370,
-        "y": 640,
+        "y": 600,
         "wires": [
             [
                 "60db9b6d4d42a914"
@@ -1129,7 +1129,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1640,
-        "y": 680,
+        "y": 640,
         "wires": [
             []
         ]
@@ -1154,7 +1154,7 @@
         "to": "",
         "reg": false,
         "x": 1370,
-        "y": 680,
+        "y": 640,
         "wires": [
             [
                 "2c7a7d1d59b25b9f"
@@ -1200,7 +1200,7 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1630,
-        "y": 720,
+        "y": 680,
         "wires": [
             []
         ]
@@ -1225,7 +1225,7 @@
         "to": "",
         "reg": false,
         "x": 1370,
-        "y": 720,
+        "y": 680,
         "wires": [
             [
                 "0c1807e6a2e6f24d"
@@ -1249,7 +1249,7 @@
         "senderr": false,
         "headers": [],
         "x": 270,
-        "y": 260,
+        "y": 340,
         "wires": [
             [
                 "9f89ee5b5e6bb513",
@@ -1271,7 +1271,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 90,
-        "y": 260,
+        "y": 340,
         "wires": [
             [
                 "ec4b2c746a30f514"
@@ -1283,7 +1283,7 @@
         "type": "function",
         "z": "e2c48a538353d801",
         "name": "compute",
-        "func": "// Extract activity data from msg.payload\nconst currentActivity = {\n    \"date\": msg.payload.data.date,\n    \"time\": msg.payload.data.time,\n    \"activity\": msg.payload.prediction\n}\nconst userData = flow.get(\"user_data\"); // User information\nconst velocity = Number(flow.get(\"velocity\")); // Retrieve global velocity from flow context\n\n// Validate the input\nif (!currentActivity || !userData || typeof velocity !== \"number\") {\n    msg.payload = { error: \"Invalid input data. Ensure activity, user data, and velocity are provided.\" };\n    return msg;\n}\n\n// User data\nconst weight = userData.weight; // In kilograms\nconst height = userData.height / 100; // Convert to meters\n\n// Get thresholds from flow context\nconst thresholds_values = flow.get('thresholds');\nconst thresholds = {\n    daily: {\n        walk: thresholds_values.walking,\n        run: thresholds_values.running\n    }\n};\n\nif (!thresholds || !thresholds.daily) {\n    node.warn(\"Daily thresholds not set in flow context. Please configure thresholds through the Dashboard.\");\n    msg.payload = { error: \"Daily thresholds not set. Please configure thresholds through the Dashboard.\" };\n    return msg;\n}\n\n// Get cumulative totals from flow context or initialize if not present\nlet cumulativeData = flow.get('cumulativeData') || {\n    totalWalkDistance: 0, // in meters\n    totalRunDistance: 0, // in meters\n    walkDuration: 0, // in seconds\n    runDuration: 0, // in seconds\n    totalCaloriesBurnedWalking: 0,\n    totalCaloriesBurnedRunning: 0\n};\n\n// Function to parse time string to seconds\nfunction parseTimeStringToSeconds(timeStr) {\n    // timeStr is in format \"HH:MM:SS.ssssss\"\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    const totalSeconds = hours * 3600 + minutes * 60 + seconds;\n    return totalSeconds;\n}\n\n// Retrieve previous activity and time from flow context\nlet previousActivity = flow.get('previousActivity');\nlet previousTime = flow.get('previousTime');\n\n// Current activity time\nconst currentTime = parseTimeStringToSeconds(currentActivity.time);\n\n// Initialize duration\nlet duration = 0;\n\n// Define maximum allowable duration between activity records (e.g., 5 minutes)\nconst maxDuration = 5 * 60; // 5 minutes in seconds\n\nif (previousTime !== undefined) {\n    // Calculate duration between current and previous activity\n    duration = currentTime - previousTime;\n\n    // Handle time crossing midnight\n    if (duration < 0) {\n        duration += 24 * 3600; // Add 24 hours in seconds\n    }\n\n    // If the gap between activities is too big, do not count this duration\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        if (previousActivity.activity === 0) {\n            // Walking\n            const walkVelocity = velocity; // Use the global velocity\n            const distance = walkVelocity * duration;\n            cumulativeData.totalWalkDistance += distance;\n            cumulativeData.walkDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedWalking += caloriesBurned;\n\n        } else if (previousActivity.activity === 1) {\n            // Running\n            const runVelocity = velocity * 2; // Running velocity is 2x walking velocity\n            const distance = runVelocity * duration;\n            cumulativeData.totalRunDistance += distance;\n            cumulativeData.runDuration += duration;\n\n            // Calories calculation\n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            cumulativeData.totalCaloriesBurnedRunning += caloriesBurned;\n        }\n    }\n}\n\n// Store current activity and time as previous for next message\nflow.set('previousActivity', currentActivity);\nflow.set('previousTime', currentTime);\n\n// Convert durations to minutes\nconst walkDurationMinutes = cumulativeData.walkDuration / 60;\nconst runDurationMinutes = cumulativeData.runDuration / 60;\n\n// Compare to thresholds\nconst isActiveWalking = walkDurationMinutes >= thresholds.daily.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.daily.run;\n\n// Prepare the result\nmsg.payload = {\n    totalWalkDistance: (cumulativeData.totalWalkDistance / 1000).toFixed(2), // In kilometers\n    totalRunDistance: (cumulativeData.totalRunDistance / 1000).toFixed(2), // In kilometers\n    walkDuration: walkDurationMinutes.toFixed(2), // In minutes\n    runDuration: runDurationMinutes.toFixed(2), // In minutes\n    totalCaloriesBurnedWalking: cumulativeData.totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: cumulativeData.totalCaloriesBurnedRunning.toFixed(2),\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\n// Save cumulative data back to flow context\nflow.set('cumulativeData', cumulativeData);\n\nreturn msg;",
+        "func": "// Load user data and thresholds from flow\nconst userData = flow.get(\"user_data\");\nconst thresholds_values = flow.get(\"thresholds\");\n\nif (!userData || !thresholds_values ||\n    typeof thresholds_values.walking !== 'number' ||\n    typeof thresholds_values.running !== 'number') {\n    msg.payload = { error: \"User data or thresholds not set. Please configure through the Dashboard.\" };\n    return msg;\n}\n\n// Extract the incoming data and prediction\nconst data = msg.payload.data;\nconst prediction = msg.payload.prediction;\nif (!data || !data.date || !data.time || typeof prediction !== 'number') {\n    msg.payload = { error: \"Invalid input data. Ensure date, time, and prediction are provided.\" };\n    return msg;\n}\n\n// User info and defaults\nconst weight = userData.weight;\nconst height = userData.height / 100; \nconst velocity = flow.get(\"current_velocity\") || 1.5; // Default or from flow\n\n// Helper functions\nfunction parseTimeStringToSeconds(timeStr) {\n    const [hoursStr, minutesStr, secondsStr] = timeStr.split(':');\n    const hours = parseInt(hoursStr);\n    const minutes = parseInt(minutesStr);\n    let seconds = 0;\n    if (secondsStr.includes('.')) {\n        const [wholeSecondsStr, fractionStr] = secondsStr.split('.');\n        const wholeSeconds = parseInt(wholeSecondsStr);\n        const fraction = parseFloat('0.' + fractionStr);\n        seconds = wholeSeconds + fraction;\n    } else {\n        seconds = parseInt(secondsStr);\n    }\n    return hours * 3600 + minutes * 60 + seconds;\n}\n\nfunction getActivityDateTime(dateStr, timeStr) {\n    const baseDate = new Date(dateStr); \n    const totalSeconds = parseTimeStringToSeconds(timeStr);\n    return new Date(baseDate.getTime() + totalSeconds * 1000);\n}\n\nfunction getDayStartTimestamp(date) {\n    return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();\n}\n\nfunction ensureDayEntry(dailyStats, dayKey) {\n    if (!dailyStats[dayKey]) {\n        dailyStats[dayKey] = {\n            walkDistance: 0,\n            runDistance: 0,\n            walkDuration: 0,\n            runDuration: 0,\n            caloriesWalk: 0,\n            caloriesRun: 0\n        };\n    }\n}\n\n// Load stored state from flow (if any)\nlet earliestDate = flow.get(\"earliestDate\") || null;\nlet latestDate = flow.get(\"latestDate\") || null;\nlet lastActivity = flow.get(\"lastActivity\") || null; // store last {dateTime, activity}\nlet dailyStats = flow.get(\"dailyStats\") || {};\nlet totalWalkDistance = flow.get(\"totalWalkDistance\") || 0;\nlet totalRunDistance = flow.get(\"totalRunDistance\") || 0;\nlet walkDuration = flow.get(\"walkDuration\") || 0;\nlet runDuration = flow.get(\"runDuration\") || 0;\nlet totalCaloriesBurnedWalking = flow.get(\"totalCaloriesBurnedWalking\") || 0;\nlet totalCaloriesBurnedRunning = flow.get(\"totalCaloriesBurnedRunning\") || 0;\n\n// Real-time chart arrays (cumulative)\nlet walkDistanceRealTimeData = flow.get(\"walkDistanceRealTimeData\") || [];\nlet runDistanceRealTimeData = flow.get(\"runDistanceRealTimeData\") || [];\nlet walkDurationRealTimeData = flow.get(\"walkDurationRealTimeData\") || [];\nlet runDurationRealTimeData = flow.get(\"runDurationRealTimeData\") || [];\nlet caloriesWalkRealTimeData = flow.get(\"caloriesWalkRealTimeData\") || [];\nlet caloriesRunRealTimeData = flow.get(\"caloriesRunRealTimeData\") || [];\n\n// Convert incoming data point to a DateTime\nconst currentDateTime = getActivityDateTime(data.date, data.time);\n\n// Update earliest and latest dates\nif (!earliestDate || currentDateTime < earliestDate) earliestDate = currentDateTime;\nif (!latestDate || currentDateTime > latestDate) latestDate = currentDateTime;\n\nconst maxDuration = 5 * 60; // 5 minutes in seconds\nif (lastActivity) {\n    const currentTime = currentDateTime.getTime() / 1000;\n    const lastTime = lastActivity.dateTime.getTime() / 1000;\n    let duration = currentTime - lastTime;\n\n    if (duration > maxDuration) {\n        duration = 0;\n    }\n\n    if (duration > 0) {\n        const activityType = prediction; // 0 = walk, 1 = run\n        const dayKey = getDayStartTimestamp(lastActivity.dateTime);\n        ensureDayEntry(dailyStats, dayKey);\n\n        if (activityType === 0) {\n            // Walking\n            const walkVelocity = velocity; \n            const distance = walkVelocity * duration;\n            totalWalkDistance += distance;\n            walkDuration += duration;\n            \n            const caloriesPerSecond =\n                0.035 * weight + ((walkVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedWalking += caloriesBurned;\n            \n            dailyStats[dayKey].walkDistance += distance;\n            dailyStats[dayKey].walkDuration += duration;\n            dailyStats[dayKey].caloriesWalk += caloriesBurned;\n\n        } else if (activityType === 1) {\n            // Running\n            const runVelocity = velocity * 2; \n            const distance = runVelocity * duration;\n            totalRunDistance += distance;\n            runDuration += duration;\n            \n            const caloriesPerSecond =\n                0.035 * weight + ((runVelocity ** 2) / height) * 0.029 * weight;\n            const caloriesBurned = caloriesPerSecond * duration;\n            totalCaloriesBurnedRunning += caloriesBurned;\n            \n            dailyStats[dayKey].runDistance += distance;\n            dailyStats[dayKey].runDuration += duration;\n            dailyStats[dayKey].caloriesRun += caloriesBurned;\n        }\n    }\n}\n\n// Update lastActivity\nlastActivity = { dateTime: currentDateTime, activity: prediction };\n\n// Recalculate daysInRange\nconst timeDiff = latestDate.getTime() - earliestDate.getTime();\nconst daysInRange = Math.max(1, Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));\n\nconst thresholds = {\n    walk: thresholds_values.walking * daysInRange,\n    run: thresholds_values.running * daysInRange\n};\n\nconst walkDurationMinutes = walkDuration / 60;\nconst runDurationMinutes = runDuration / 60;\nconst isActiveWalking = walkDurationMinutes >= thresholds.walk;\nconst isActiveRunning = runDurationMinutes >= thresholds.run;\n\n// Sort the days for daily aggregates\nconst dayKeys = Object.keys(dailyStats).map(k => parseInt(k)).sort((a, b) => a - b);\n\n// Build daily data arrays\nconst walkDistanceData = [];\nconst runDistanceData = [];\nconst walkDurationData = [];\nconst runDurationData = [];\nconst caloriesWalkData = [];\nconst caloriesRunData = [];\n\nfor (const dayKey of dayKeys) {\n    const dayStat = dailyStats[dayKey];\n    walkDistanceData.push({ x: dayKey, y: (dayStat.walkDistance / 1000) }); \n    runDistanceData.push({ x: dayKey, y: (dayStat.runDistance / 1000) });\n    walkDurationData.push({ x: dayKey, y: (dayStat.walkDuration / 60) });\n    runDurationData.push({ x: dayKey, y: (dayStat.runDuration / 60) });\n    caloriesWalkData.push({ x: dayKey, y: dayStat.caloriesWalk });\n    caloriesRunData.push({ x: dayKey, y: dayStat.caloriesRun });\n}\n\n// Add a real-time data point at the current timestamp with cumulative totals\nconst currentTimestamp = currentDateTime.getTime();\nwalkDistanceRealTimeData.push({ x: currentTimestamp, y: (totalWalkDistance / 1000) });\nrunDistanceRealTimeData.push({ x: currentTimestamp, y: (totalRunDistance / 1000) });\nwalkDurationRealTimeData.push({ x: currentTimestamp, y: walkDurationMinutes });\nrunDurationRealTimeData.push({ x: currentTimestamp, y: runDurationMinutes });\ncaloriesWalkRealTimeData.push({ x: currentTimestamp, y: totalCaloriesBurnedWalking });\ncaloriesRunRealTimeData.push({ x: currentTimestamp, y: totalCaloriesBurnedRunning });\n\n// Prepare separate payloads for each metric - Daily Aggregates\nconst walkDistanceChart = [{\n    series: [\"Walk Distance\"],\n    data: [walkDistanceData],\n    labels: [\"Walk Distance\"]\n}];\n\nconst runDistanceChart = [{\n    series: [\"Run Distance\"],\n    data: [runDistanceData],\n    labels: [\"Run Distance\"]\n}];\n\nconst walkDurationChart = [{\n    series: [\"Walk Duration\"],\n    data: [walkDurationData],\n    labels: [\"Walk Duration\"]\n}];\n\nconst runDurationChart = [{\n    series: [\"Run Duration\"],\n    data: [runDurationData],\n    labels: [\"Run Duration\"]\n}];\n\nconst caloriesWalkChart = [{\n    series: [\"Calories Walking\"],\n    data: [caloriesWalkData],\n    labels: [\"Calories Walking\"]\n}];\n\nconst caloriesRunChart = [{\n    series: [\"Calories Running\"],\n    data: [caloriesRunData],\n    labels: [\"Calories Running\"]\n}];\n\n// Real-time Charts\nconst walkDistanceRealTimeChart = [{\n    series: [\"Walk Distance (Real-Time)\"],\n    data: [walkDistanceRealTimeData],\n    labels: [\"Walk Distance (Real-Time)\"]\n}];\n\nconst runDistanceRealTimeChart = [{\n    series: [\"Run Distance (Real-Time)\"],\n    data: [runDistanceRealTimeData],\n    labels: [\"Run Distance (Real-Time)\"]\n}];\n\nconst walkDurationRealTimeChart = [{\n    series: [\"Walk Duration (Real-Time)\"],\n    data: [walkDurationRealTimeData],\n    labels: [\"Walk Duration (Real-Time)\"]\n}];\n\nconst runDurationRealTimeChart = [{\n    series: [\"Run Duration (Real-Time)\"],\n    data: [runDurationRealTimeData],\n    labels: [\"Run Duration (Real-Time)\"]\n}];\n\nconst caloriesWalkRealTimeChart = [{\n    series: [\"Calories Walking (Real-Time)\"],\n    data: [caloriesWalkRealTimeData],\n    labels: [\"Calories Walking (Real-Time)\"]\n}];\n\nconst caloriesRunRealTimeChart = [{\n    series: [\"Calories Running (Real-Time)\"],\n    data: [caloriesRunRealTimeData],\n    labels: [\"Calories Running (Real-Time)\"]\n}];\n\n// Aggregate info\nconst aggregate = {\n    totalWalkDistance: (totalWalkDistance / 1000).toFixed(2),\n    totalRunDistance: (totalRunDistance / 1000).toFixed(2),\n    walkDuration: walkDurationMinutes.toFixed(2),\n    runDuration: runDurationMinutes.toFixed(2),\n    totalCaloriesBurnedWalking: totalCaloriesBurnedWalking.toFixed(2),\n    totalCaloriesBurnedRunning: totalCaloriesBurnedRunning.toFixed(2),\n    daysInRange: daysInRange,\n    activityStatus: {\n        walking: isActiveWalking ? \"active\" : \"sedentary\",\n        running: isActiveRunning ? \"active\" : \"sedentary\"\n    }\n};\n\n// Save updated state in flow\nflow.set(\"earliestDate\", earliestDate);\nflow.set(\"latestDate\", latestDate);\nflow.set(\"lastActivity\", lastActivity);\nflow.set(\"dailyStats\", dailyStats);\nflow.set(\"totalWalkDistance\", totalWalkDistance);\nflow.set(\"totalRunDistance\", totalRunDistance);\nflow.set(\"walkDuration\", walkDuration);\nflow.set(\"runDuration\", runDuration);\nflow.set(\"totalCaloriesBurnedWalking\", totalCaloriesBurnedWalking);\nflow.set(\"totalCaloriesBurnedRunning\", totalCaloriesBurnedRunning);\n\n// Store the real-time arrays as well\nflow.set(\"walkDistanceRealTimeData\", walkDistanceRealTimeData);\nflow.set(\"runDistanceRealTimeData\", runDistanceRealTimeData);\nflow.set(\"walkDurationRealTimeData\", walkDurationRealTimeData);\nflow.set(\"runDurationRealTimeData\", runDurationRealTimeData);\nflow.set(\"caloriesWalkRealTimeData\", caloriesWalkRealTimeData);\nflow.set(\"caloriesRunRealTimeData\", caloriesRunRealTimeData);\n\nmsg.payload = {\n    // Daily aggregates\n    walkDistanceChart,\n    runDistanceChart,\n    walkDurationChart,\n    runDurationChart,\n    caloriesWalkChart,\n    caloriesRunChart,\n    // Real-time charts\n    walkDistanceRealTimeChart,\n    runDistanceRealTimeChart,\n    walkDurationRealTimeChart,\n    runDurationRealTimeChart,\n    caloriesWalkRealTimeChart,\n    caloriesRunRealTimeChart,\n    // Aggregate info\n    aggregate\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1291,7 +1291,7 @@
         "finalize": "",
         "libs": [],
         "x": 800,
-        "y": 260,
+        "y": 340,
         "wires": [
             [
                 "8250c638c836aac4",
@@ -1302,6 +1302,12 @@
                 "a7f43f562bd0a46b",
                 "531397fe46717a21",
                 "c4af6e4e36efbdf3",
+                "5b0ea8c841e9f4ff",
+                "61d7543c20eab76c",
+                "6090fbc8e130fd17",
+                "1e31bb04cad1add3",
+                "810eb08f55b80226",
+                "f64db66f643a733f",
                 "314040bdbdf99975"
             ]
         ]
@@ -1312,19 +1318,19 @@
         "z": "e2c48a538353d801",
         "group": "d18297c87373db73",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": 12,
+        "height": 1,
         "name": "",
-        "label": "Walk Distance [km]",
-        "format": "{{msg.payload.totalWalkDistance}}",
+        "label": "Total Walk Distance [km]",
+        "format": "{{msg.payload.aggregate.totalWalkDistance}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1050,
-        "y": 120,
+        "x": 1070,
+        "y": 200,
         "wires": []
     },
     {
@@ -1332,20 +1338,20 @@
         "type": "ui_text",
         "z": "e2c48a538353d801",
         "group": "d18297c87373db73",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 5,
+        "width": 12,
+        "height": 1,
         "name": "",
-        "label": "Run Distance [km]",
-        "format": "{{msg.payload.totalRunDistance}}",
+        "label": "Total Run Distance [km]",
+        "format": "{{msg.payload.aggregate.totalRunDistance}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1050,
-        "y": 160,
+        "x": 1070,
+        "y": 240,
         "wires": []
     },
     {
@@ -1353,54 +1359,12 @@
         "type": "ui_text",
         "z": "e2c48a538353d801",
         "group": "d18297c87373db73",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 2,
+        "width": 12,
+        "height": 1,
         "name": "",
-        "label": "Walk Duration [mins]",
-        "format": "{{msg.payload.walkDuration}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 1060,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "476b30f57fbe2a64",
-        "type": "ui_text",
-        "z": "e2c48a538353d801",
-        "group": "d18297c87373db73",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Run Duration [mins]",
-        "format": "{{msg.payload.runDuration}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 1060,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "fd44e85aeecfbae0",
-        "type": "ui_text",
-        "z": "e2c48a538353d801",
-        "group": "d18297c87373db73",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Burned Calories Walking",
-        "format": "{{msg.payload.totalCaloriesBurnedWalking}}",
+        "label": "Total Walk Duration [mins]",
+        "format": "{{msg.payload.aggregate.walkDuration}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -1412,16 +1376,16 @@
         "wires": []
     },
     {
-        "id": "a7f43f562bd0a46b",
+        "id": "476b30f57fbe2a64",
         "type": "ui_text",
         "z": "e2c48a538353d801",
         "group": "d18297c87373db73",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 6,
+        "width": 12,
+        "height": 1,
         "name": "",
-        "label": "Burned Calories Running",
-        "format": "{{msg.payload.totalCaloriesBurnedRunning}}",
+        "label": "Total Run Duration [mins]",
+        "format": "{{msg.payload.aggregate.runDuration}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
@@ -1433,24 +1397,66 @@
         "wires": []
     },
     {
-        "id": "531397fe46717a21",
+        "id": "fd44e85aeecfbae0",
         "type": "ui_text",
         "z": "e2c48a538353d801",
         "group": "d18297c87373db73",
-        "order": 8,
-        "width": 0,
-        "height": 0,
+        "order": 9,
+        "width": 12,
+        "height": 1,
         "name": "",
-        "label": "Walking Status",
-        "format": "{{msg.payload.activityStatus.walking}}",
+        "label": "Total Burned Calories Walking",
+        "format": "{{msg.payload.aggregate.totalCaloriesBurnedWalking}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1040,
+        "x": 1090,
         "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a7f43f562bd0a46b",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 10,
+        "width": 12,
+        "height": 1,
+        "name": "",
+        "label": "Total Burned Calories Running",
+        "format": "{{msg.payload.aggregate.totalCaloriesBurnedRunning}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1090,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "531397fe46717a21",
+        "type": "ui_text",
+        "z": "e2c48a538353d801",
+        "group": "d18297c87373db73",
+        "order": 13,
+        "width": 12,
+        "height": 1,
+        "name": "",
+        "label": "Total Walking Status",
+        "format": "{{msg.payload.aggregate.activityStatus.walking}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1060,
+        "y": 440,
         "wires": []
     },
     {
@@ -1458,20 +1464,20 @@
         "type": "ui_text",
         "z": "e2c48a538353d801",
         "group": "d18297c87373db73",
-        "order": 7,
-        "width": 0,
-        "height": 0,
+        "order": 14,
+        "width": 12,
+        "height": 1,
         "name": "",
-        "label": "Running Status",
-        "format": "{{msg.payload.activityStatus.running}}",
+        "label": "Total Running Status",
+        "format": "{{msg.payload.aggregate.activityStatus.running}}",
         "layout": "row-spread",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1040,
-        "y": 400,
+        "x": 1060,
+        "y": 480,
         "wires": []
     },
     {
@@ -1481,7 +1487,7 @@
         "name": "user-data",
         "label": "User Data",
         "group": "e1a2f045e06dfd7f",
-        "order": 0,
+        "order": 1,
         "width": 0,
         "height": 0,
         "options": [
@@ -1528,7 +1534,7 @@
         "splitLayout": "",
         "className": "",
         "x": 260,
-        "y": 580,
+        "y": 100,
         "wires": [
             [
                 "831dc260262550c6",
@@ -1555,8 +1561,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
-        "y": 580,
+        "x": 550,
+        "y": 100,
         "wires": [
             []
         ]
@@ -1567,8 +1573,8 @@
         "z": "e2c48a538353d801",
         "name": "",
         "events": "all",
-        "x": 100,
-        "y": 620,
+        "x": 80,
+        "y": 140,
         "wires": [
             [
                 "71f70d9e72934c1c",
@@ -1581,9 +1587,9 @@
         "type": "ui_form",
         "z": "e2c48a538353d801",
         "name": "",
-        "label": "Activity Thresholds [mins+",
+        "label": "Activity Thresholds [mins]",
         "group": "e1a2f045e06dfd7f",
-        "order": 0,
+        "order": 2,
         "width": 0,
         "height": 0,
         "options": [
@@ -1614,7 +1620,7 @@
         "splitLayout": "",
         "className": "",
         "x": 310,
-        "y": 660,
+        "y": 180,
         "wires": [
             [
                 "a99edb7a187f58c3"
@@ -1641,7 +1647,7 @@
         "to": "",
         "reg": false,
         "x": 550,
-        "y": 660,
+        "y": 180,
         "wires": [
             []
         ]
@@ -1658,8 +1664,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
-        "y": 520,
+        "x": 530,
+        "y": 40,
         "wires": [
             [
                 "4aa521664d5945fb"
@@ -1685,8 +1691,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
-        "y": 520,
+        "x": 730,
+        "y": 40,
         "wires": [
             []
         ]
@@ -1704,7 +1710,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1020,
-        "y": 460,
+        "y": 520,
         "wires": []
     },
     {
@@ -1717,8 +1723,8 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 790,
-        "y": 320,
+        "x": 810,
+        "y": 280,
         "wires": [
             []
         ]
@@ -1735,11 +1741,437 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 320,
+        "x": 620,
+        "y": 280,
         "wires": [
             [
                 "71556706acc55ee2"
+            ]
+        ]
+    },
+    {
+        "id": "26b54c1cffc84464",
+        "type": "ui_chart",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "group": "d18297c87373db73",
+        "order": 3,
+        "width": 12,
+        "height": 6,
+        "label": "Walk Distance",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1040,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b0ea8c841e9f4ff",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.walkDistanceRealTimeData",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 560,
+        "wires": [
+            [
+                "26b54c1cffc84464"
+            ]
+        ]
+    },
+    {
+        "id": "9bfd68aea01f5e93",
+        "type": "ui_chart",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "group": "d18297c87373db73",
+        "order": 7,
+        "width": 12,
+        "height": 6,
+        "label": "Run Distance",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1040,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61d7543c20eab76c",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.runDistanceChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 600,
+        "wires": [
+            [
+                "9bfd68aea01f5e93"
+            ]
+        ]
+    },
+    {
+        "id": "a42159cd9487207c",
+        "type": "ui_chart",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "group": "d18297c87373db73",
+        "order": 4,
+        "width": 12,
+        "height": 6,
+        "label": "Walk Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6090fbc8e130fd17",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.walkDurationChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 640,
+        "wires": [
+            [
+                "a42159cd9487207c"
+            ]
+        ]
+    },
+    {
+        "id": "73fa2d3dbca1e3dd",
+        "type": "ui_chart",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "group": "d18297c87373db73",
+        "order": 8,
+        "width": 12,
+        "height": 6,
+        "label": "Run Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1020,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1e31bb04cad1add3",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.runDurationRealTimeData",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 680,
+        "wires": [
+            [
+                "73fa2d3dbca1e3dd"
+            ]
+        ]
+    },
+    {
+        "id": "4813dc79c7aaa5f4",
+        "type": "ui_chart",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "group": "d18297c87373db73",
+        "order": 11,
+        "width": 12,
+        "height": 6,
+        "label": "Walk Calories",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1040,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "810eb08f55b80226",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.caloriesWalkChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 720,
+        "wires": [
+            [
+                "4813dc79c7aaa5f4"
+            ]
+        ]
+    },
+    {
+        "id": "b3c6b4d7a28ff4b4",
+        "type": "ui_chart",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "group": "d18297c87373db73",
+        "order": 12,
+        "width": 12,
+        "height": 6,
+        "label": "Run Calories",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Select a date range to get the data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f64db66f643a733f",
+        "type": "change",
+        "z": "e2c48a538353d801",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.caloriesRunChart",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 760,
+        "wires": [
+            [
+                "b3c6b4d7a28ff4b4"
             ]
         ]
     }
