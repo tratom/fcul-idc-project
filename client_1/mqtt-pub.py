@@ -30,7 +30,7 @@ client.loop_start()
 topic = "idc/FC64699"
 
 # File dei dati
-file_path = "online copy.data"
+file_path = "online.data"
 
 # Legge i dati dal file CSV e invia le richieste
 with open(file_path, mode='r') as file:
