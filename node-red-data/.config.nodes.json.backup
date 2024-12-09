@@ -1,7 +1,7 @@
 {
     "node-red": {
         "name": "node-red",
-        "version": "4.0.3",
+        "version": "4.0.5",
         "local": false,
         "user": false,
         "nodes": {
@@ -683,27 +683,6 @@
                 "user": false,
                 "module": "node-red-dashboard",
                 "file": "/data/node_modules/node-red-dashboard/nodes/ui_spacer.js"
-            }
-        }
-    },
-    "node-red-contrib-persist": {
-        "name": "node-red-contrib-persist",
-        "version": "1.1.1",
-        "local": true,
-        "user": true,
-        "nodes": {
-            "persist": {
-                "name": "persist",
-                "types": [
-                    "persist-store",
-                    "persist in",
-                    "persist out"
-                ],
-                "enabled": true,
-                "local": true,
-                "user": false,
-                "module": "node-red-contrib-persist",
-                "file": "/data/node_modules/node-red-contrib-persist/persist.js"
             }
         }
     }

@@ -8,7 +8,6 @@ WORKDIR /app
 COPY app.py /app
 COPY training /app/training
 COPY requirements.txt /app
-COPY model /app/model
 COPY modules /app/modules
 
 # Install dependencies

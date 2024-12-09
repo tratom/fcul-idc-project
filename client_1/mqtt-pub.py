@@ -7,13 +7,13 @@ from datetime import datetime
 broker_hostname = "127.0.0.1"
 port = 1883 
 
-def on_connect(client, userdata, flags, return_code):
+def on_connect(client, userdata, flags, return_code, properties):
     if return_code == 0:
         print("connected")
     else:
         print("could not connect, return code:", return_code)
 
-client = mqtt.Client("Client1")
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 # client.username_pw_set(username="user_name", password="password") # uncomment if you use password auth
 client.on_connect=on_connect
 

@@ -1,5 +1,6 @@
 # Local imports
 import datetime
+import numpy as np
 
 # Third part imports
 from flask import Flask
@@ -35,8 +36,26 @@ def scale_values(data):
             scaled_data[key] = (value - min_values[key]) / (max_values[key] - min_values[key])
         else:
             raise KeyError(f"Key {key} not found in min_values or max_values")
-# TODO use exaclty the same structure for the training, in the same exact order
     return scaled_data
+
+def dict_to_np_array(scaled_data):
+    """
+    Convert a scaled dictionary to a numpy array of floats in the given feature order.
+    
+    Args:
+        scaled_data (dict): The scaled feature dictionary.
+        feature_order (list): The list of features in the order expected by the model.
+        
+    Returns:
+        np.ndarray: A numpy array of floats in the specified order.
+    """
+    feature_order = ['acceleration_x', 'acceleration_y', 'acceleration_z', 'gyro_x', 'gyro_y', 'gyro_z']
+    try:
+        # Extract features in the correct order
+        feature_values = [scaled_data[feature] for feature in feature_order]
+        return np.array(feature_values, dtype=float)
+    except KeyError as e:
+        raise ValueError(f"Missing feature in input data: {e}")
 
 
 app = Flask(__name__)
@@ -69,12 +88,13 @@ def predict():
         model_name = 'knn-model'
         model = joblib.load('model/' + model_name + '.dat.gz')
         
-        # Directly pass feature_dict to scale_values
+        # Scale and convert to numpy array
         scaled_data = scale_values(feature_dict)
+        np_array_data = dict_to_np_array(scaled_data)
         
         # Wrap scaled_data into a list before passing to the model
         response = {
-            "prediction": get_model_response([scaled_data], model)["prediction"],
+            "prediction": get_model_response([np_array_data], model)["prediction"],
             "data": data
         }
         

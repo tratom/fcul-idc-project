@@ -16,6 +16,7 @@ from sklearn.metrics import confusion_matrix
 
 import joblib
 import gzip
+import os
 
 ##############################################
 # Funções para converter e reverter a escala 
@@ -107,4 +108,7 @@ print('Confusion matrix:')
 print(confusion_matrix(output_test, output_predicted, labels = [0.0, 1.0]))
 
 # Export model
-joblib.dump(KNN, gzip.open('model/knn-model.dat.gz', "wb"))
+model_path = "model"
+if not os.path.exists(model_path):
+    os.makedirs(model_path)
+joblib.dump(KNN, gzip.open(f'{model_path}/knn-model.dat.gz', "wb"))
